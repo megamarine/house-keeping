@@ -1,8 +1,7 @@
 <?php 
 foreach ($kembali->result() as $k) {
     $card_no = $k->rfid_no;
-}
-?>
+}?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
