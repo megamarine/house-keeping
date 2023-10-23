@@ -29,7 +29,7 @@ class Dashboard extends CI_Controller
 
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Dashboard',
-            'conten' => 'conten/dashboard',
+            'conten' => 'conten_usr/dashboard',
             'pinjam_hari' => $day1,
             'kembali_hari' => $day2,
             'total_day' => $day1 - $day2,
@@ -38,6 +38,6 @@ class Dashboard extends CI_Controller
             'total_bln' => $bln1 - $bln2
         ];
 
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_usr/conten', $data);
     }
 }

@@ -32,7 +32,8 @@ class M_transaksi extends CI_Model
       tmt.item_name,
       tmt.deskripsi,
       tmk.no_badge,
-      tmk.name
+      tmk.name,
+      tt.status
     FROM
       tbl_transaksi tt
     JOIN tbl_master_item tmt on
@@ -42,25 +43,14 @@ class M_transaksi extends CI_Model
     where
       tgl_pinjam >= date(now())
     order by
-      tgl_pinjam desc");
+      id desc");
   }
 
   function cek_pinjam($rfid_no) {
     return $this->db->query("SELECT
-      tt.id,
-      tt.rfid_no,
-      tt.tgl_pinjam,
-      tt.tgl_kembali,
-      tmt.item_name,
-      tmt.deskripsi,
-      tmk.no_badge,
-      tmk.name
+      *
     from
       tbl_transaksi tt
-    join tbl_master_item tmt on
-      tmt.id = tt.item_id
-    join tbl_master_karyawan tmk on
-      tmk.rfid_no = tt.rfid_no
     where
       tgl_pinjam >= date(now()) and tt.rfid_no = '$rfid_no'
     order by
@@ -69,24 +59,13 @@ class M_transaksi extends CI_Model
 
   function cek_kembali($rfid_no) {
     return $this->db->query("SELECT
-      tt.id,
-      tt.rfid_no,
-      tt.tgl_pinjam,
-      tt.tgl_kembali,
-      tmt.item_name,
-      tmt.deskripsi,
-      tmk.no_badge,
-      tmk.name
-    from
-      tbl_transaksi tt
-    join tbl_master_item tmt on
-      tmt.id = tt.item_id
-    join tbl_master_karyawan tmk on
-      tmk.rfid_no = tt.rfid_no
-    where
-      tgl_pinjam >= date(now()) and tt.rfid_no = '$rfid_no'
-    order by
-      tgl_pinjam desc");
+    tgl_kembali
+  from
+    tbl_transaksi tt
+  where
+    tgl_pinjam >= date(now()) and tt.rfid_no = '$rfid_no'
+  order by
+    tgl_kembali desc");
   }
 
   function rekap_trans() {

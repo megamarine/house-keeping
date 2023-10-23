@@ -25,14 +25,14 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Pinjam',
-            'conten' => 'conten/trans_pinjam',
+            'conten' => 'conten_usr/trans_pinjam',
             'pinjam' => $this->trans->pinjam(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_usr/conten', $data);
     }
 
     function pinjam() {
@@ -51,14 +51,14 @@ class Transaksi extends CI_Controller
             $this->m_data->simpan_data($table,$data);
             $this->session->set_flashdata('trans', 'Disimpan');
         }
-        redirect('index.php/transaksi');
+        redirect('index.php/user/transaksi');
     }
 
     function vkembali() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
-            'conten' => 'conten/trans_kembali',
+            'conten' => 'conten_usr/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
             'kembali' => $this->m_data->get_data('tbl_transaksi'),
             'footer_js' => [
@@ -66,7 +66,7 @@ class Transaksi extends CI_Controller
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_usr/conten', $data);
     }
 
     function kembali() {
@@ -90,21 +90,21 @@ class Transaksi extends CI_Controller
             $this->m_data->update_data($table,$data,$where);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
         }
-        redirect('index.php/transaksi/vkembali');
+        redirect('index.php/user/transaksi/vkembali');
     }
 
-    function rekap_transaksi() {
-        $data = [
-            // 'name'    => $this->session->userdata('nama'),
-            'title' => 'Rekap Transaksi',
-            'conten' => 'conten/rekap_transaksi',
-            'rekap' => $this->trans->rekap_trans(),
-            'footer_js' => [
-                'assets/js/trans.js',
-            ],
+    // function rekap_transaksi() {
+    //     $data = [
+    //         // 'name'    => $this->session->userdata('nama'),
+    //         'title' => 'Rekap Transaksi',
+    //         'conten' => 'conten/rekap_transaksi',
+    //         'rekap' => $this->trans->rekap_trans(),
+    //         'footer_js' => [
+    //             'assets/js/trans.js',
+    //         ],
             
-        ];
-        $this->load->view('template/conten', $data);
-    }
+    //     ];
+    //     $this->load->view('template/conten', $data);
+    // }
 
 }

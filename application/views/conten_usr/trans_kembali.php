@@ -1,16 +1,22 @@
+<?php 
+foreach ($kembali->result() as $k) {
+    $card_no = $k->rfid_no;
+}
+?>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
-<div class="flash-transaksi" data-flashdata="<?= $this->session->flashdata('trans') ?>"></div>
+<div class="flash-kembali" data-flashdata="<?= $this->session->flashdata('kembali') ?>"></div>
 <div class="flash-cek" data-flashdata="<?= $this->session->flashdata('cek') ?>"></div>
 
 <!-- Form -->
 <div class="card shadow mb-2">
     
     <div class="card-body">
-     <form action="<?= base_url('index.php/transaksi/pinjam') ?>" method="post">
+     <form action="<?= base_url('index.php/user/transaksi/kembali/'.$card_no) ?>" method="post">
          <div class="input-group">
             <input type="text" name="rfid" id="rfid" class="form-control bg-light border-0 small" placeholder="Tab it..."
                 aria-label="Search" aria-describedby="basic-addon2" autofocus>
@@ -28,7 +34,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Transaksi Pinjam</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Transaksi Kembali</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -41,6 +47,7 @@
                         <th>Item</th>
                         <th>Deskripsi</th>
                         <th>Pinjam</th>
+                        <th>Kembali</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -55,13 +62,14 @@
                         <td><?= $row->item_name ?></td>
                         <td><?= $row->deskripsi ?></td>
                         <td><?= $row->tgl_pinjam ?></td>
+                        <td><?= $row->tgl_kembali ?></td>
                         <td>
                             <?php 
-                            if ($row->status == 1) {?>
-                                <span class="badge badge-info">Dipinjam</span>
-                            <?php }else { ?>
+                            if ($row->tgl_kembali != null) {?>
                                 <span class="badge badge-success">Dikembalikan</span>
-                           <?php } ?>
+                            <?php }else { ?>
+                                <span class="badge badge-info">Dipinjam</span>
+                            <?php } ?>
                         </td>
                     </tr>
                     <?php }
