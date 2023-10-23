@@ -21,13 +21,21 @@ class Dashboard extends CI_Controller
     public function index()
 
     {
+        $day1 = $this->dash->pinjam_hari();
+        $day2 = $this->dash->kembali_hari();
+        $bln1 = $this->dash->pinjam_bln();
+        $bln2 = $this->dash->kembali_bln();
         $data = [
 
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Dashboard',
             'conten' => 'conten/dashboard',
-            'pinjam_hari' => $this->dash->pinjam_hari(),
-            'kembali_hari' => $this->dash->kembali_hari()
+            'pinjam_hari' => $day1,
+            'kembali_hari' => $day2,
+            'total_day' => $day1 - $day2,
+            'pinjam_bln' => $bln1,
+            'kembali_bln' => $bln2,
+            'total_bln' => $bln1 - $bln2
         ];
 
         $this->load->view('template/conten', $data);

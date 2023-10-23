@@ -7,11 +7,19 @@ class M_Dashboard extends CI_Model
   }
   
   function pinjam_hari()  {
-    return $this->db->query("SELECT * FROM tbl_transaksi tt where status = '1' and tgl_pinjam >= date(now())")->num_rows();
+    return $this->db->query("SELECT tgl_pinjam FROM tbl_transaksi where tgl_pinjam >= date(now())")->num_rows();
   }
 
   function kembali_hari() {
-    return $this->db->query("SELECT * FROM tbl_transaksi tt where status = '2' and tgl_pinjam >= date(now())")->num_rows();
+    return $this->db->query("SELECT tgl_kembali FROM tbl_transaksi where tgl_pinjam >= date(now())")->num_rows();
+  }
+
+  function pinjam_bln() {
+    return $this->db->query("SELECT tgl_pinjam FROM tbl_transaksi where tgl_pinjam >= month(now())")->num_rows();
+  }
+
+  function kembali_bln() {
+    return $this->db->query("SELECT tgl_kembali FROM tbl_transaksi where tgl_kembali >= month(now())")->num_rows();
   }
 
 }
