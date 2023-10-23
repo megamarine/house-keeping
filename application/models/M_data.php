@@ -25,4 +25,8 @@ class M_data extends CI_Model
   {
     $this->db->delete($table, $where);
   }
+
+  function update_trans($rfid, $tgl, $stat)  {
+    return $this->db->query("UPDATE tbl_transaksi SET tgl_kembali = '$tgl', status = $stat WHERE rfid_no = '$rfid' AND tgl_pinjam >= DATE(NOW())");
+  }
 }

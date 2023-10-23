@@ -57,7 +57,7 @@
                         <td><?= $row->tgl_pinjam ?></td>
                         <td>
                             <?php 
-                            if ($row->tgl_kembali == null) {?>
+                            if ($row->status == 1) {?>
                                 <span class="badge badge-info">Dipinjam</span>
                             <?php }else { ?>
                                 <span class="badge badge-success">Dikembalikan</span>
