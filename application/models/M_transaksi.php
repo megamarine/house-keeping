@@ -43,7 +43,7 @@ class M_transaksi extends CI_Model
     where
       tgl_pinjam >= date(now())
     order by
-      tgl_pinjam desc");
+      id desc");
   }
 
   function cek_pinjam($rfid_no) {

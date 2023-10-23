@@ -11,7 +11,7 @@ class M_Dashboard extends CI_Model
   }
 
   function kembali_hari() {
-    return $this->db->query("SELECT tgl_kembali FROM tbl_transaksi where tgl_pinjam >= date(now())")->num_rows();
+    return $this->db->query("SELECT tgl_kembali FROM tbl_transaksi where tgl_kembali >= date(now())")->num_rows();
   }
 
   function pinjam_bln() {
