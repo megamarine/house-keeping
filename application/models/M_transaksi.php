@@ -98,7 +98,7 @@ class M_transaksi extends CI_Model
     return $this->db->query("SELECT rfid_no, status FROM tbl_transaksi tt where rfid_no = '$rfid' and status = '1' order by tgl_pinjam asc limit 1");
   }
 
-  function report($bln) {
+  function report($bln,$thn) {
     return $this->db->query("SELECT
       tt.id,
       tt.rfid_no,
@@ -116,6 +116,6 @@ class M_transaksi extends CI_Model
       tmt.id = tt.item_id
     join tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
-      where month(tgl_pinjam) = '$bln'");
+      where month(tgl_pinjam) = '$bln' and year(tgl_pinjam) = '$thn'");
   }
 }

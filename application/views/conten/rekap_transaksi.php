@@ -25,6 +25,14 @@
               <option value="11">November</option>
               <option value="12">Desember</option>
             </select>
+            <select name="tahun" id="tahun" class="form-control">
+              <?php 
+              $yn = date('Y');
+              for ($i=$yn; $i >= $yn-2 ; $i--) { ?>
+                <option value="<?= $i ?>"><?= $i ?></option>
+              <?php }
+              ?>
+            </select>
             <div class="input-group-append">
                 <button type="submit" class="btn btn-danger" id="btn" type="button">
                     <i class="fas fa-file-pdf"></i>
