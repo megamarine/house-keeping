@@ -26,14 +26,14 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Pinjam',
-            'conten' => 'conten/trans_pinjam',
+            'conten' => 'conten_hk/trans_pinjam',
             'pinjam' => $this->trans->pinjam(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_hk/conten', $data);
     }
 
     function pinjam() {
@@ -63,14 +63,14 @@ class Transaksi extends CI_Controller
             $this->m_data->simpan_data($table,$data);
             $this->session->set_flashdata('trans', 'Disimpan');
         }
-        redirect('index.php/transaksi');
+        redirect('index.php/hk/transaksi');
     }
 
     function vkembali() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
-            'conten' => 'conten/trans_kembali',
+            'conten' => 'conten_hk/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
             'kembali' => $this->m_data->get_data('tbl_transaksi'),
             'footer_js' => [
@@ -78,7 +78,7 @@ class Transaksi extends CI_Controller
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_hk/conten', $data);
     }
 
     function kembali() {
@@ -102,21 +102,21 @@ class Transaksi extends CI_Controller
             $this->m_data->update_data($table,$data,$where);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
         }
-        redirect('index.php/transaksi/vkembali');
+        redirect('index.php/hk/transaksi/vkembali');
     }
 
     function rekap_transaksi() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',
-            'conten' => 'conten/rekap_transaksi',
+            'conten' => 'conten_hk/rekap_transaksi',
             'rekap' => $this->trans->rekap_trans(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_hk/conten', $data);
     }
 
     function update_last_trans($id) {
@@ -129,7 +129,7 @@ class Transaksi extends CI_Controller
         $where = array('id' => $id);
         $this->m_data->update_data($table,$data,$where);
         $this->session->set_flashdata('kembali', 'Dikembalikan');
-        redirect('index.php/transaksi/rekap_transaksi');
+        redirect('index.php/hk/transaksi/rekap_transaksi');
     }
 
     function pdf() {
