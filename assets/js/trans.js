@@ -20,6 +20,28 @@ if (flashCek) {
 	});
 }
 
+const flashCekData = $(".flash-cekdata").data("flashdata");
+if (flashCekData) {
+	Swal.fire({
+		icon: "error",
+		title: "Maaf",
+		text: "Data Karyawan tidak " + flashCekData,
+        timer: 3000,
+        showConfirmButton: false,
+	});
+}
+
+const flashCekDataTrans = $(".flash-cekdatatrans").data("flashdata");
+if (flashCekDataTrans) {
+	Swal.fire({
+		icon: "error",
+		title: "Maaf",
+		text: "Status Transaksi terakhir " + flashCekDataTrans,
+        timer: 3000,
+        showConfirmButton: false,
+	});
+}
+
 const flashKembali = $(".flash-kembali").data("flashdata");
 if (flashKembali) {
 	Swal.fire({

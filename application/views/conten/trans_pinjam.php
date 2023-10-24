@@ -5,6 +5,8 @@
 <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 <div class="flash-transaksi" data-flashdata="<?= $this->session->flashdata('trans') ?>"></div>
 <div class="flash-cek" data-flashdata="<?= $this->session->flashdata('cek') ?>"></div>
+<div class="flash-cekdata" data-flashdata="<?= $this->session->flashdata('cekdata') ?>"></div>
+<div class="flash-cekdatatrans" data-flashdata="<?= $this->session->flashdata('cektrans') ?>"></div>
 
 <!-- Form -->
 <div class="card shadow mb-2">

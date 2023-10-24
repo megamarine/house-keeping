@@ -37,6 +37,13 @@ class Transaksi extends CI_Controller
 
     function pinjam() {
         $rfid_input = $this->input->post('rfid');
+        $dk = $this->trans->data_kar($rfid_input);
+        foreach ($dk->result() as $row) {
+            $rfid = $row->rfid_no;
+        }
+        foreach ($this->trans->cek_trans($rfid_input)->result() as $row) {
+            $sts_trans = $row->status;
+        }
         $cek = $this->trans->cek_pinjam($rfid_input);
         $table = 'tbl_transaksi';
         $data = [
@@ -45,7 +52,11 @@ class Transaksi extends CI_Controller
             'tgl_pinjam' => date('Y-m-d h:i:s'),
             'status' => 1
         ];
-        if ($cek > 0) {
+        if ($rfid == null) {
+            $this->session->set_flashdata('cekdata', 'Ditemukan');
+        }elseif ($sts_trans == 1) {
+            $this->session->set_flashdata('cektrans', 'Belum Lunas');
+        }elseif ($cek > 0) {
             $this->session->set_flashdata('cek', 'Dilakukan');
         }else {
             $this->m_data->simpan_data($table,$data);
@@ -105,6 +116,19 @@ class Transaksi extends CI_Controller
             
         ];
         $this->load->view('template/conten', $data);
+    }
+
+    function update_last_trans($id) {
+        $table = 'tbl_transaksi';
+        $data = [
+            'tgl_kembali' => $this->input->post('tgl_kembali'),
+            'status' => 2,
+            'keterangan' => $this->input->post('keterangan')
+        ];
+        $where = array('id' => $id);
+        $this->m_data->update_data($table,$data,$where);
+        $this->session->set_flashdata('kembali', 'Dikembalikan');
+        redirect('index.php/transaksi/rekap_transaksi');
     }
 
 }

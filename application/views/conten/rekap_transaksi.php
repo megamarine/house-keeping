@@ -3,6 +3,7 @@
 
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
+<div class="flash-kembali" data-flashdata="<?= $this->session->flashdata('kembali') ?>"></div>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -20,6 +21,7 @@
                         <th>Deskripsi</th>
                         <th>Pinjam</th>
                         <th>Kembali</th>
+                        <th>Keterangan</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -27,6 +29,7 @@
                 <tbody>
                     <?php 
                     $x=1;
+                    $no=1;
                     foreach ($rekap->result() as $row) { ?>
                     <tr>
                         <td><?= $x++; ?></td>
@@ -36,6 +39,7 @@
                         <td><?= $row->deskripsi ?></td>
                         <td><?= $row->tgl_pinjam ?></td>
                         <td><?= $row->tgl_kembali ?></td>
+                        <td><?= $row->keterangan ?></td>
                         <td>
                             <?php 
                             if ($row->tgl_kembali != null) {?>
@@ -44,7 +48,14 @@
                                 <span class="badge badge-info">Dipinjam</span>
                             <?php } ?>
                         </td>
-                        <td>Action</td>
+                        <td>
+                            <?php if ($row->status == 1) {?>
+                                <!-- <a href="" class="btn btn-danger"><i class="fa fa-check-circle"></i></a> -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edit<?= $no++; ?>">
+                                    <i class="fa fa-check-circle"></i>
+                                </button>
+                            <?php } ?>                            
+                        </td>
                     </tr>
                     <?php }
                     ?>
@@ -64,3 +75,39 @@
         input.focus();
      }
 </script> -->
+
+<?php 
+$y=1;
+$date = date('Y-m-d h:i:s');
+foreach ($rekap->result() as $row) {
+?>
+<div class="modal fade" id="edit<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form action="<?= base_url('index.php/transaksi/update_last_trans/'.$row->id) ?>" method="post" enctype="multipart/form-data">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Tanggal Pengembalian</label>
+        <input type="datetime-local" class="form-control" id="tgl_kembali" name="tgl_kembali" value="<?= $date ?>">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Keterangan</label>
+        <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php $no++;}
+?>
