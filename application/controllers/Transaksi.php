@@ -10,6 +10,7 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_transaksi','trans');
+        $this->load->library('pdf');
         date_default_timezone_set('Asia/Jakarta');
 
         // if ($this->session->userdata('status') == FALSE || $this->session->userdata('level') != 1) {
@@ -129,6 +130,42 @@ class Transaksi extends CI_Controller
         $this->m_data->update_data($table,$data,$where);
         $this->session->set_flashdata('kembali', 'Dikembalikan');
         redirect('index.php/transaksi/rekap_transaksi');
+    }
+
+    function pdf() {
+        $bln = $this->input->post('bulan');
+        if ($bln == '01') {
+           $convert = "Januari";
+        }elseif ($bln == '02') {
+            $convert = "Februari";
+        }elseif ($bln == '03') {
+            $convert = "Maret";
+        }elseif ($bln == '04') {
+            $convert = "April";
+        }elseif ($bln == '05') {
+            $convert = "Mei";
+        }elseif ($bln == '06') {
+            $convert = "Juni";
+        }elseif ($bln == '07') {
+            $convert = "Juli";
+        }elseif ($bln == '08') {
+            $convert = "Agustus";
+        }elseif ($bln == '09') {
+            $convert = "September";
+        }elseif ($bln == '10') {
+            $convert = "Oktober";
+        }elseif ($bln == '11') {
+            $convert = "November";
+        }else {
+            $convert = "Desember";
+        }
+        $data = [
+            'title' => 'Report APD - '.$convert,
+            'data' => $this->trans->report($bln)
+        ];
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "report ".$convert.".pdf";
+        $this->pdf->load_view('conten/report', $data);
     }
 
 }

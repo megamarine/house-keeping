@@ -97,4 +97,25 @@ class M_transaksi extends CI_Model
   function cek_trans($rfid)  {
     return $this->db->query("SELECT rfid_no, status FROM tbl_transaksi tt where rfid_no = '$rfid' and status = '1' order by tgl_pinjam asc limit 1");
   }
+
+  function report($bln) {
+    return $this->db->query("SELECT
+      tt.id,
+      tt.rfid_no,
+      tt.tgl_pinjam,
+      tt.tgl_kembali,
+      tt.status,
+      tt.keterangan,
+      tmt.item_name,
+      tmt.deskripsi,
+      tmk.no_badge,
+      tmk.name
+    from
+      tbl_transaksi tt
+    join tbl_master_item tmt on
+      tmt.id = tt.item_id
+    join tbl_master_karyawan tmk on
+      tmk.rfid_no = tt.rfid_no
+      where month(tgl_pinjam) = '$bln'");
+  }
 }

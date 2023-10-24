@@ -5,9 +5,40 @@
 <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 <div class="flash-kembali" data-flashdata="<?= $this->session->flashdata('kembali') ?>"></div>
 
+<div class="card shadow mb-2">
+    
+    <div class="card-body">
+     <form action="<?= base_url('index.php/transaksi/pdf') ?>" method="post">
+         <div class="input-group col-md-4">
+            <select name="bulan" id="bulan" class="form-control" required>
+              <option value="" disabled selected>Pilih Bulan</option>
+              <option value="01">Januari</option>
+              <option value="02">Februari</option>
+              <option value="03">Maret</option>
+              <option value="04">April</option>
+              <option value="05">Mei</option>
+              <option value="06">Juni</option>
+              <option value="07">Juli</option>
+              <option value="08">Agustus</option>
+              <option value="09">September</option>
+              <option value="10">Oktober</option>
+              <option value="11">November</option>
+              <option value="12">Desember</option>
+            </select>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-danger" id="btn" type="button">
+                    <i class="fas fa-file-pdf"></i>
+                    <!-- <i class="fa-solid fa-share-from-square"></i> -->
+                </button>
+            </div>
+        </div>
+     </form>
+    </div>
+</div>
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Transaksi Kembali</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Rekap Transaksi</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -84,7 +115,7 @@ foreach ($rekap->result() as $row) {
 <div class="modal fade" id="edit<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-    <form action="<?= base_url('index.php/hk/transaksi/update_last_trans/'.$row->id) ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url('index.php/transaksi/update_last_trans/'.$row->id) ?>" method="post" enctype="multipart/form-data">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
