@@ -26,8 +26,9 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04AA6D;
+  background-color: #0080ff;
   color: white;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -35,12 +36,12 @@
     <h2 style="align-content: center;"><?= $title ?></h2>
     <table id="customers">
         <tr>
-            <td>No</td>
-            <td>ID Karyawan</td>
-            <td>Nama</td>
-            <td>Tanggal Pinjam</td>
-            <td>Tanggal Kembali</td>
-            <td>Keterangan</td>
+            <th>No</th>
+            <th>ID Karyawan</th>
+            <th>Nama</th>
+            <th>Tanggal Pinjam</th>
+            <th>Tanggal Kembali</th>
+            <th>Keterangan</th>
         </tr>
         <?php
         $x=1; 

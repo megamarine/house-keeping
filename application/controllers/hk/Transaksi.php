@@ -10,7 +10,6 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_transaksi','trans');
-        $this->load->library('pdf');
         date_default_timezone_set('Asia/Jakarta');
 
         // if ($this->session->userdata('status') == FALSE || $this->session->userdata('level') != 1) {
@@ -134,6 +133,7 @@ class Transaksi extends CI_Controller
 
     function pdf() {
         $bln = $this->input->post('bulan');
+        $thn = $this->input->post('tahun');
         if ($bln == '01') {
            $convert = "Januari";
         }elseif ($bln == '02') {
@@ -160,12 +160,13 @@ class Transaksi extends CI_Controller
             $convert = "Desember";
         }
         $data = [
-            'title' => 'Report APD - '.$convert,
-            'data' => $this->trans->report($bln)
+            'title' => 'Report APD - '.$convert.' '.$thn,
+            'data' => $this->trans->report($bln,$thn)
         ];
-        $this->pdf->setPaper('A4', 'potrait');
-        $this->pdf->filename = "report ".$convert.".pdf";
-        $this->pdf->load_view('conten/report', $data);
+        $name = 'Report APD - '.$convert.' '.$thn;
+        $this->load->library('pdf');
+        $html = $this->load->view('conten/report', $data, true);
+        $this->pdf->createPDF($html, $name, false);
     }
 
 }

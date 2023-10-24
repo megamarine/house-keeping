@@ -8,7 +8,7 @@
 <div class="card shadow mb-2">
     
     <div class="card-body">
-     <form action="<?= base_url('index.php/transaksi/pdf') ?>" method="post">
+     <form action="<?= base_url('index.php/hk/transaksi/pdf') ?>" method="post">
          <div class="input-group col-md-4">
             <select name="bulan" id="bulan" class="form-control" required>
               <option value="" disabled selected>Pilih Bulan</option>
@@ -24,6 +24,14 @@
               <option value="10">Oktober</option>
               <option value="11">November</option>
               <option value="12">Desember</option>
+            </select>
+            <select name="tahun" id="tahun" class="form-control">
+              <?php 
+              $yn = date('Y');
+              for ($i=$yn; $i >= $yn-2 ; $i--) { ?>
+                <option value="<?= $i ?>"><?= $i ?></option>
+              <?php }
+              ?>
             </select>
             <div class="input-group-append">
                 <button type="submit" class="btn btn-danger" id="btn" type="button">
