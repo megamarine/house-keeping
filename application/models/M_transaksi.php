@@ -74,6 +74,8 @@ class M_transaksi extends CI_Model
       tt.rfid_no,
       tt.tgl_pinjam,
       tt.tgl_kembali,
+      tt.status,
+      tt.keterangan,
       tmt.item_name,
       tmt.deskripsi,
       tmk.no_badge,
@@ -86,5 +88,13 @@ class M_transaksi extends CI_Model
       tmk.rfid_no = tt.rfid_no
     order by
       tgl_pinjam desc");
+  }
+
+  function data_kar($rfid)  {
+    return $this->db->query("SELECT rfid_no, name FROM tbl_master_karyawan WHERE rfid_no = '$rfid'");
+  }
+
+  function cek_trans($rfid)  {
+    return $this->db->query("SELECT rfid_no, status FROM tbl_transaksi tt where rfid_no = '$rfid' and status = '1' order by tgl_pinjam asc limit 1");
   }
 }
