@@ -5,8 +5,9 @@ class M_transaksi extends CI_Model
   {
     parent::__construct();
   }
-  
-  function transaksi()  {
+
+  function transaksi()
+  {
     return $this->db->query("SELECT
       tt.id,
       tt.rfid_no,
@@ -23,7 +24,8 @@ class M_transaksi extends CI_Model
     JOIN tbl_master_karyawan tmk on tmk.rfid_no = tt.rfid_no order by tt.tgl_pinjam DESC");
   }
 
-  function pinjam()  {
+  function pinjam()
+  {
     return $this->db->query("SELECT
       tt.id,
       tt.rfid_no,
@@ -46,7 +48,8 @@ class M_transaksi extends CI_Model
       id desc");
   }
 
-  function cek_pinjam($rfid_no) {
+  function cek_pinjam($rfid_no)
+  {
     return $this->db->query("SELECT
       *
     from
@@ -57,7 +60,8 @@ class M_transaksi extends CI_Model
       tgl_pinjam desc")->num_rows();
   }
 
-  function cek_kembali($rfid_no) {
+  function cek_kembali($rfid_no)
+  {
     return $this->db->query("SELECT
     tgl_kembali
   from
@@ -68,7 +72,8 @@ class M_transaksi extends CI_Model
     tgl_kembali desc");
   }
 
-  function rekap_trans() {
+  function rekap_trans()
+  {
     return $this->db->query("SELECT
       tt.id,
       tt.rfid_no,
@@ -90,32 +95,37 @@ class M_transaksi extends CI_Model
       tgl_pinjam desc");
   }
 
-  function data_kar($rfid)  {
-    return $this->db->query("SELECT rfid_no, name FROM tbl_master_karyawan WHERE rfid_no = '$rfid'");
+  function data_kar($rfid)
+  {
+    return $this->db->query("SELECT rfid_no, name, status FROM tbl_master_karyawan WHERE rfid_no = '$rfid'");
   }
 
-  function cek_trans($rfid)  {
+  function cek_trans($rfid)
+  {
     return $this->db->query("SELECT rfid_no, status FROM tbl_transaksi tt where rfid_no = '$rfid' and status = '1' order by tgl_pinjam asc limit 1");
   }
 
-  function report($bln,$thn) {
+  function report($bln, $thn)
+  {
     return $this->db->query("SELECT
-      tt.id,
-      tt.rfid_no,
-      tt.tgl_pinjam,
-      tt.tgl_kembali,
-      tt.status,
-      tt.keterangan,
-      tmt.item_name,
-      tmt.deskripsi,
-      tmk.no_badge,
-      tmk.name
-    from
-      tbl_transaksi tt
-    join tbl_master_item tmt on
-      tmt.id = tt.item_id
-    join tbl_master_karyawan tmk on
-      tmk.rfid_no = tt.rfid_no
+        tt.id,
+        tt.rfid_no,
+        tt.tgl_pinjam,
+        tt.tgl_kembali,
+        tt.status,
+        tt.keterangan,
+        tmt.item_name,
+        tmt.deskripsi,
+        tmk.no_badge,
+        tmk.name,
+        tmb.nama_bagian 
+      from
+        tbl_transaksi tt
+      join tbl_master_item tmt on
+        tmt.id = tt.item_id
+      join tbl_master_karyawan tmk on
+        tmk.rfid_no = tt.rfid_no
+      join tbl_master_bagian tmb on tmk.bagian_id = tmb.id
       where month(tgl_pinjam) = '$bln' and year(tgl_pinjam) = '$thn'");
   }
 }

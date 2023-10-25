@@ -39,6 +39,7 @@
             <th>No</th>
             <th>ID Karyawan</th>
             <th>Nama</th>
+            <th>Bagian</th>
             <th>Tanggal Pinjam</th>
             <th>Tanggal Kembali</th>
             <th>Keterangan</th>
@@ -50,6 +51,7 @@
                 <td><?= $x++; ?></td>
                 <td><?= $row->no_badge ?></td>
                 <td><?= $row->name ?></td>
+                <td><?= $row->nama_bagian ?></td>
                 <td><?= $row->tgl_pinjam ?></td>
                 <td><?= $row->tgl_kembali ?></td>
                 <td><?= $row->keterangan ?></td>

@@ -26,4 +26,19 @@ class M_master extends CI_Model
       c.id = b.company_id");
   }
 
+  function list_kar()  {
+    return $this->db->query("SELECT
+      tmk.id,
+      tmk.no_badge,
+      tmk.name,
+      tmk.rfid_no,
+      tmk.bagian_id,
+      tmb.nama_bagian,
+      tmk.status
+    FROM
+      tbl_master_karyawan tmk
+    JOIN tbl_master_bagian tmb on
+      tmb.id = tmk.bagian_id");
+  }
+
 }

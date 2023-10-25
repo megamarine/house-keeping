@@ -41,6 +41,7 @@ class Transaksi extends CI_Controller
         $dk = $this->trans->data_kar($rfid_input);
         foreach ($dk->result() as $row) {
             $rfid = $row->rfid_no;
+            $stts = $row->status;
         }
         foreach ($this->trans->cek_trans($rfid_input)->result() as $row) {
             $sts_trans = $row->status;
@@ -53,8 +54,8 @@ class Transaksi extends CI_Controller
             'tgl_pinjam' => date('Y-m-d h:i:s'),
             'status' => 1
         ];
-        if ($rfid == null) {
-            $this->session->set_flashdata('cekdata', 'Ditemukan');
+        if ($rfid == null || $stts != 1) {
+            $this->session->set_flashdata('cekdata', 'Ditemukan / Dinonaktifkan');
         }elseif ($sts_trans == 1) {
             $this->session->set_flashdata('cektrans', 'Belum Lunas');
         }elseif ($cek > 0) {
