@@ -27,8 +27,49 @@ class Employee extends CI_Controller
             'subtitle' => 'Employee List',
             'conten' => 'conten_hk/employee',
             'employee' => $this->M_data->get_data('tbl_master_karyawan'),
+            'footer_js' => [
+                'assets/js/employee.js',
+            ],
+            'bagian' => $this->m_data->get_data('tbl_master_bagian'),
         ];
 
         $this->load->view('template_hk/conten', $data);
+    }
+
+    function tambah_data() {
+        $table = 'tbl_master_karyawan';
+        $data = [
+            'no_badge' => $this->input->post('idkar'),
+            'name' => $this->input->post('namakar'),
+            'rfid_no' => $this->input->post('rfidno'),
+            'bagian_id' => $this->input->post('bagian')
+        ];
+        $this->m_data->simpan_data($table,$data);
+        $this->session->set_flashdata('add', 'Disimpan');
+        redirect('index.php/hk/Employee');
+    }
+
+    function update_data($id)  {
+        $table = 'tbl_master_karyawan';
+        $data = [
+            'no_badge' => $this->input->post('idkar'),
+            'name' => $this->input->post('namakar'),
+            'rfid_no' => $this->input->post('rfidno')
+        ];
+        $where = array('id' => $id);
+        $this->m_data->update_data($table,$data,$where);
+        $this->session->set_flashdata('add', 'Diubah');
+        redirect('index.php/hk/employee');
+    }
+
+    function nonaktif($id)  {
+        $table = 'tbl_master_karyawan';
+        $data = [
+            'status' => 0
+        ];
+        $where = array('id'=> $id);
+        $this->m_data->update_data($table,$data,$where);
+        $this->session->set_flashdata('add', 'Dinonaktifkan');
+        redirect('index.php/hk/employee');
     }
 }
