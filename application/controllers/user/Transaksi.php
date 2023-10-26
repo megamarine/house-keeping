@@ -72,7 +72,7 @@ class Transaksi extends CI_Controller
             'title' => 'Transaksi Kembali',
             'conten' => 'conten_usr/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
-            'kembali' => $this->m_data->get_data('tbl_transaksi'),
+            'kembali' => $this->trans->kembali(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
