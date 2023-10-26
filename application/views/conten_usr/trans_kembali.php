@@ -54,7 +54,7 @@ foreach ($kembali->result() as $k) {
                 <tbody>
                     <?php 
                     $x=1;
-                    foreach ($pinjam->result() as $row) { ?>
+                    foreach ($kembali->result() as $row) { ?>
                     <tr>
                         <td><?= $x++; ?></td>
                         <td><?= $row->no_badge ?></td>
