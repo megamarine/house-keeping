@@ -48,6 +48,30 @@ class M_transaksi extends CI_Model
       id desc");
   }
 
+  function kembali()
+  {
+    return $this->db->query("SELECT
+      tt.id,
+      tt.rfid_no,
+      tt.tgl_pinjam,
+      tt.tgl_kembali,
+      tmt.item_name,
+      tmt.deskripsi,
+      tmk.no_badge,
+      tmk.name,
+      tt.status
+    FROM
+      tbl_transaksi tt
+    JOIN tbl_master_item tmt on
+      tmt.id = tt.item_id
+    JOIN tbl_master_karyawan tmk on
+      tmk.rfid_no = tt.rfid_no
+    where
+      DATE(tgl_pinjam) > (NOW() - INTERVAL 2 DAY)
+    order by
+      id desc");
+  }
+
   function cek_pinjam($rfid_no)
   {
     return $this->db->query("SELECT
@@ -70,6 +94,18 @@ class M_transaksi extends CI_Model
     tgl_pinjam >= date(now()) and tt.rfid_no = '$rfid_no'
   order by
     tgl_kembali desc");
+  }
+
+  function cek_kembali_sebelum($rfid_no) {
+    return $this->db->query("SELECT
+        tgl_pinjam,
+        tgl_kembali
+      from
+        tbl_transaksi tt
+      where
+        tgl_pinjam > (DATE_SUB(CURDATE(), INTERVAL 1 day)) and tt.rfid_no = '$rfid_no'
+      order by
+        tgl_pinjam desc");
   }
 
   function rekap_trans()

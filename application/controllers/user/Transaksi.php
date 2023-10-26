@@ -87,6 +87,11 @@ class Transaksi extends CI_Controller
         foreach ($cek->result() as $row) {
             $tgl_cek = $row->tgl_kembali;
         }
+        $cek_sebelum = $this->trans->cek_kembali_sebelum($rfid_input);
+        foreach ($cek_sebelum->result() as $row) {
+            $tgl_cek_sblm = $row->tgl_kembali;
+            $tgl_pjm = $row->tgl_pinjam;
+        }
         $datecek = date('Y-m-d');
         // return var_dump($cek);
         $table = 'tbl_transaksi';
@@ -94,10 +99,14 @@ class Transaksi extends CI_Controller
             'tgl_kembali' => date('Y-m-d h:i:s'),
             'status' => 2
         ];
-        $arr = array('rfid_no' => $rfid_input, 'tgl_pinjam >=' => $datecek);
+        $arr = array('rfid_no' => $rfid_input);
+        // 'tgl_pinjam >=' => $datecek
         $where = $arr;
         if ($tgl_cek != null) {
             $this->session->set_flashdata('cek', 'Dilakukan');
+        }elseif ($tgl_pjm != $datecek && $tgl_cek_sblm == null) {
+            $this->m_data->update_data($table,$data,$where);
+            $this->session->set_flashdata('kembali', 'Dikembalikan');
         }else {
             $this->m_data->update_data($table,$data,$where);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
