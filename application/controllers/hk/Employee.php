@@ -26,6 +26,7 @@ class Employee extends CI_Controller
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Master Empployee',
             'subtitle' => 'Employee List',
+            'titleform' => 'Tambah Data',
             'conten' => 'conten_hk/employee',
             'employee' => $this->master->list_kar(),
             'footer_js' => [
