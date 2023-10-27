@@ -9,6 +9,7 @@ class Employee extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('M_master','master');
 
         // if ($this->session->userdata('status') == FALSE || $this->session->userdata('level') != 1) {
 
@@ -26,7 +27,7 @@ class Employee extends CI_Controller
             'title' => 'Master Empployee',
             'subtitle' => 'Employee List',
             'conten' => 'conten_hk/employee',
-            'employee' => $this->M_data->get_data('tbl_master_karyawan'),
+            'employee' => $this->master->list_kar(),
             'footer_js' => [
                 'assets/js/employee.js',
             ],
