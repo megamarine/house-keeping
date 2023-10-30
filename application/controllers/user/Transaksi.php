@@ -50,7 +50,7 @@ class Transaksi extends CI_Controller
         $data = [
             'rfid_no' => $rfid_input,
             'item_id' => 1,
-            'tgl_pinjam' => date('Y-m-d h:i:s'),
+            'tgl_pinjam' => date('Y-m-d H:i:s'),
             'status' => 1
         ];
         if ($rfid == null || $stts != 1) {
@@ -96,7 +96,7 @@ class Transaksi extends CI_Controller
         // return var_dump($cek);
         $table = 'tbl_transaksi';
         $data = [
-            'tgl_kembali' => date('Y-m-d h:i:s'),
+            'tgl_kembali' => date('Y-m-d H:i:s'),
             'status' => 2
         ];
         $arr = array('rfid_no' => $rfid_input);
