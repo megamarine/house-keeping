@@ -62,8 +62,14 @@ foreach ($kembali->result() as $k) {
                         <td><?= $row->rfid_no ?></td>
                         <td><?= $row->item_name ?></td>
                         <td><?= $row->deskripsi ?></td>
-                        <td><?= $row->tgl_pinjam ?></td>
-                        <td><?= $row->tgl_kembali ?></td>
+                        <td><?= date('d-m-Y H:i:s', strtotime($row->tgl_pinjam)) ?></td>
+                        <td><?php 
+                            if ($row->tgl_kembali != null) {
+                                echo date('d-m-Y H:i:s', strtotime($row->tgl_kembali));
+                            }else {
+                                echo ' ';
+                            }
+                        ?></td>
                         <td>
                             <?php 
                             if ($row->tgl_kembali != null) {?>

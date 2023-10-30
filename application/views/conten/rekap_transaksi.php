@@ -55,8 +55,26 @@
             </div>
         </div>
      </form>
+
+     <!-- Export by status -->
+     <form action="<?= base_url('index.php/transaksi/pdf_status') ?>" method="post">
+         <div class="input-group col-md-4 mt-2">
+            <select name="status" id="status" class="form-control">
+                <option value="" disabled selected> -- Choose One --</option>
+                <option value="1">Belum Lunas</option>
+                <option value="2">Lunas</option>
+            </select>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-danger" id="btn" type="button">
+                    <i class="fas fa-file-pdf"></i>
+                </button>
+            </div>
+        </div>
+     </form>
     </div>
 </div>
+
+
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -92,8 +110,14 @@
                         <td><?= $row->rfid_no ?></td>
                         <td><?= $row->item_name ?></td>
                         <td><?= $row->deskripsi ?></td>
-                        <td><?= $row->tgl_pinjam ?></td>
-                        <td><?= $row->tgl_kembali ?></td>
+                        <td><?= date('d-m-Y H:i:s', strtotime($row->tgl_pinjam)) ?></td>
+                        <td><?php 
+                            if ($row->tgl_kembali != null) {
+                                echo date('d-m-Y H:i:s', strtotime($row->tgl_kembali));
+                            }else {
+                                echo ' ';
+                            }
+                        ?></td>
                         <td><?= $row->keterangan ?></td>
                         <td>
                             <?php 
