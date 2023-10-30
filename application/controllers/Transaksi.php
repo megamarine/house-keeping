@@ -193,4 +193,21 @@ class Transaksi extends CI_Controller
         $this->pdf->createPDF($html, $name, false);
     }
 
+    function pdf_status() {
+        $status = $this->input->post('status');
+        if ($status = 1) {
+            $sts = 'Belum Lunas';
+        }else {
+            $sts = 'Lunas';
+        }
+        $data = [
+            'title' => 'Report APD - '. $sts,
+            'data' => $this->trans->report_by_status($status)
+        ];
+        $name = 'Report APD - '. $sts;
+        $this->load->library('pdf');
+        $html = $this->load->view('conten/report', $data, true);
+        $this->pdf->createPDF($html, $name, false);
+    }
+
 }

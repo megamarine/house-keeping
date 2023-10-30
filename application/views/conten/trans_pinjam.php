@@ -58,7 +58,7 @@
                         <td><?= $row->rfid_no ?></td>
                         <td><?= $row->item_name ?></td>
                         <td><?= $row->deskripsi ?></td>
-                        <td><?= $row->tgl_pinjam ?></td>
+                        <td><?= date('d-m-Y H:i:s', strtotime($row->tgl_pinjam)) ?></td>
                         <td>
                             <?php 
                             if ($row->status == 1) {?>
