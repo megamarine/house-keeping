@@ -44,6 +44,7 @@ foreach ($kembali->result() as $k) {
                         <th>No</th>
                         <th>No Badge</th>
                         <th>Nama</th>
+                        <th>No RFID</th>
                         <th>Item</th>
                         <th>Deskripsi</th>
                         <th>Pinjam</th>
@@ -59,6 +60,7 @@ foreach ($kembali->result() as $k) {
                         <td><?= $x++; ?></td>
                         <td><?= $row->no_badge ?></td>
                         <td><?= $row->name ?></td>
+                        <td><?= $row->rfid_no ?></td>
                         <td><?= $row->item_name ?></td>
                         <td><?= $row->deskripsi ?></td>
                         <td><?= $row->tgl_pinjam ?></td>
