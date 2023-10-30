@@ -42,7 +42,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Trancsaction:</h6>
-                        <a class="collapse-item" href="<?= site_url('index.php/user/transaksi') ?>">Transaksi Pinjam</a>
+                        <!-- <a class="collapse-item" href="<?= site_url('index.php/user/transaksi') ?>">Transaksi Pinjam</a> -->
                         <a class="collapse-item" href="<?= site_url('index.php/user/transaksi/vkembali') ?>">Transaksi Kembali</a>
                         <!-- <a class="collapse-item" href="<?= site_url('index.php/transaksi/rekap_transaksi') ?>">Rekap Transaksi</a> -->
                     </div>

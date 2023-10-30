@@ -41,6 +41,20 @@
             </div>
         </div>
      </form>
+
+     <!-- Export By Date -->
+     <form action="<?= base_url('index.php/hk/transaksi/pdf_bydate') ?>" method="post">
+         <div class="input-group col-md-4 mt-2">
+            <input type="date" class="form-control" name="date_start" id="date_start" required>
+            <input type="date" class="form-control" name="date_end" id="date_end" required>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-danger" id="btn" type="button">
+                    <i class="fas fa-file-pdf"></i>
+                    <!-- <i class="fa-solid fa-share-from-square"></i> -->
+                </button>
+            </div>
+        </div>
+     </form>
     </div>
 </div>
 
@@ -56,6 +70,7 @@
                         <th>No</th>
                         <th>No Badge</th>
                         <th>Nama</th>
+                        <th>No RFID</th>
                         <th>Item</th>
                         <th>Deskripsi</th>
                         <th>Pinjam</th>
@@ -74,6 +89,7 @@
                         <td><?= $x++; ?></td>
                         <td><?= $row->no_badge ?></td>
                         <td><?= $row->name ?></td>
+                        <td><?= $row->rfid_no ?></td>
                         <td><?= $row->item_name ?></td>
                         <td><?= $row->deskripsi ?></td>
                         <td><?= $row->tgl_pinjam ?></td>
