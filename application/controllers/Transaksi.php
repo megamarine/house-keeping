@@ -180,4 +180,17 @@ class Transaksi extends CI_Controller
         $this->pdf->createPDF($html, $name, false);
     }
 
+    function pdf_bydate() {
+        $tgl_start = $this->input->post('date_start');
+        $tgl_end = $this->input->post('date_end');
+        $data = [
+            'title' => 'Report APD - '. date('d/m/Y', strtotime($tgl_start)) .' sampai '.date('d/m/Y', strtotime($tgl_end)),
+            'data' => $this->trans->report_date_between($tgl_start,$tgl_end)
+        ];
+        $name = 'Report APD - '.date('d/m/Y', strtotime($tgl_start)) .' sampai '.date('d/m/Y', strtotime($tgl_end));
+        $this->load->library('pdf');
+        $html = $this->load->view('conten/report', $data, true);
+        $this->pdf->createPDF($html, $name, false);
+    }
+
 }

@@ -43,7 +43,7 @@
      </form>
 
      <!-- Export By Date -->
-     <form action="<?= base_url('index.php/hk/transaksi/pdf') ?>" method="post">
+     <form action="<?= base_url('index.php/transaksi/pdf_bydate') ?>" method="post">
          <div class="input-group col-md-4 mt-2">
             <input type="date" class="form-control" name="date_start" id="date_start" required>
             <input type="date" class="form-control" name="date_end" id="date_end" required>
