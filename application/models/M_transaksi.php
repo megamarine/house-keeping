@@ -43,9 +43,7 @@ class M_transaksi extends CI_Model
     JOIN tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
     where
-      tgl_pinjam >= date(now())
-    order by
-      id desc");
+      tgl_pinjam >= date(now())");
   }
 
   function kembali()
@@ -67,9 +65,7 @@ class M_transaksi extends CI_Model
     JOIN tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
     where
-      DATE(tgl_pinjam) > (NOW() - INTERVAL 2 DAY)
-    order by
-      id desc");
+      DATE(tgl_pinjam) > (NOW() - INTERVAL 2 DAY)");
   }
 
   function cek_pinjam($rfid_no)
