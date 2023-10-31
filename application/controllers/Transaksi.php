@@ -52,7 +52,8 @@ class Transaksi extends CI_Controller
             'rfid_no' => $rfid_input,
             'item_id' => 1,
             'tgl_pinjam' => date('Y-m-d H:i:s'),
-            'status' => 1
+            'status' => 1,
+            'date_pinjam' => date('Y-m-d'),
         ];
         if ($rfid == null || $stts != 1) {
             $this->session->set_flashdata('cekdata', 'Ditemukan / Dinonaktifkan');
@@ -98,7 +99,8 @@ class Transaksi extends CI_Controller
         $table = 'tbl_transaksi';
         $data = [
             'tgl_kembali' => date('Y-m-d H:i:s'),
-            'status' => 2
+            'status' => 2,
+            'date_kembali' => date('Y-m-d'),
         ];
         $arr = array('rfid_no' => $rfid_input);
         // 'tgl_pinjam >=' => $datecek
