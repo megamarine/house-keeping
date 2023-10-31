@@ -181,7 +181,7 @@ class M_transaksi extends CI_Model
     join tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
     join tbl_master_bagian tmb on tmk.bagian_id = tmb.id
-    where tgl_pinjam between '$date_start' and '$date_end'");
+    where tt.date_pinjam between '$date_start' and '$date_end'");
   }
 
   function report_by_status($sts) {
