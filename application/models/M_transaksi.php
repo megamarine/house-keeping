@@ -65,7 +65,7 @@ class M_transaksi extends CI_Model
     JOIN tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
     where
-      DATE(tgl_pinjam) > (NOW() - INTERVAL 2 DAY)");
+      DATE(tgl_pinjam) > (NOW() - INTERVAL 2 DAY) and status = 2");
   }
 
   function cek_pinjam($rfid_no)
