@@ -4,7 +4,7 @@ if (flashAdd) {
 		icon: "success",
 		title: "Selamat",
 		text: "Data Karyawan Berhasil " + flashAdd,
-        timer: 2500,
+        timer: 1000,
         showConfirmButton: false,
 	});
 }
