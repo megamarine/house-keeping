@@ -4,7 +4,7 @@ if (flashTransaksi) {
 		icon: "success",
 		title: "Selamat",
 		text: "Transaksi Peminjaman Berhasil " + flashTransaksi,
-        timer: 3000,
+        timer: 1500,
         showConfirmButton: false,
 	});
 }
@@ -15,7 +15,7 @@ if (flashCek) {
 		icon: "error",
 		title: "Maaf",
 		text: "Transaksi Telah dilakukan",
-        timer: 3000,
+        timer: 1500,
         showConfirmButton: false,
 	});
 }
@@ -26,7 +26,7 @@ if (flashCekData) {
 		icon: "error",
 		title: "Maaf",
 		text: "Data Karyawan tidak " + flashCekData,
-        timer: 3000,
+        timer: 1500,
         showConfirmButton: false,
 	});
 }
@@ -37,7 +37,7 @@ if (flashCekDataTrans) {
 		icon: "error",
 		title: "Maaf",
 		text: "Status Transaksi terakhir " + flashCekDataTrans,
-        timer: 3000,
+        timer: 1500,
         showConfirmButton: false,
 	});
 }
@@ -48,7 +48,7 @@ if (flashKembali) {
 		icon: "success",
 		title: "Selamat",
 		text: "Transaksi Peminjaman Berhasil " + flashKembali,
-        timer: 3000,
+        timer: 1500,
         showConfirmButton: false,
 	});
 }
