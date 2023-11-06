@@ -119,13 +119,10 @@
                                 <span class="badge badge-info">Dipinjam</span>
                             <?php } ?>
                         </td>
-                        <td>
-                            <?php if ($row->status == 1) {?>
-                                <!-- <a href="" class="btn btn-danger"><i class="fa fa-check-circle"></i></a> -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edit<?= $no++; ?>">
+                        <td>  
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edit<?= $no++; ?>">
                                     <i class="fa fa-check-circle"></i>
-                                </button>
-                            <?php } ?>                            
+                            </button>                         
                         </td>
                     </tr>
                     <?php }
