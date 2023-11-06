@@ -134,7 +134,7 @@ class Transaksi extends CI_Controller
     function update_last_trans($id) {
         $table = 'tbl_transaksi';
         $data = [
-            'tgl_kembali' => $this->input->post('tgl_kembali'),
+            'tgl_kembali' => date('Y-m-d H:i:s', strtotime($this->input->post('tgl_kembali'))),
             'status' => 2,
             'keterangan' => $this->input->post('keterangan')
         ];
