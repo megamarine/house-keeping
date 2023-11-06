@@ -16,7 +16,7 @@ foreach ($kembali->result() as $k) {
 <div class="card shadow mb-2">
     
     <div class="card-body">
-     <form action="<?= base_url('index.php/user/transaksi/kembali/'.$card_no) ?>" method="post">
+     <form action="<?= base_url('index.php/user/transaksi/kembali') ?>" method="post">
          <div class="input-group">
             <input type="text" name="rfid" id="rfid" class="form-control bg-light border-0 small" placeholder="Tab it..."
                 aria-label="Search" aria-describedby="basic-addon2" autofocus>
