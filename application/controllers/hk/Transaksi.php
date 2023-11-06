@@ -10,6 +10,7 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_transaksi','trans');
+        // $this->load->library('pdf');
         date_default_timezone_set('Asia/Jakarta');
 
         // if ($this->session->userdata('status') == FALSE || $this->session->userdata('level') != 1) {
@@ -25,14 +26,14 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Pinjam',
-            'conten' => 'conten_hk/trans_pinjam',
+            'conten' => 'conten/trans_pinjam',
             'pinjam' => $this->trans->pinjam(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
-        $this->load->view('template_hk/conten', $data);
+        $this->load->view('template/conten', $data);
     }
 
     function pinjam() {
@@ -52,7 +53,7 @@ class Transaksi extends CI_Controller
             'item_id' => 1,
             'tgl_pinjam' => date('Y-m-d H:i:s'),
             'status' => 1,
-            'date_pinjam' => date('Y-m-d')
+            'date_pinjam' => date('Y-m-d'),
         ];
         if ($rfid == null || $stts != 1) {
             $this->session->set_flashdata('cekdata', 'Ditemukan / Dinonaktifkan');
@@ -71,7 +72,7 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
-            'conten' => 'conten_hk/trans_kembali',
+            'conten' => 'conten/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
             'kembali' => $this->trans->kembali(),
             'footer_js' => [
@@ -79,7 +80,7 @@ class Transaksi extends CI_Controller
             ],
             
         ];
-        $this->load->view('template_hk/conten', $data);
+        $this->load->view('template/conten', $data);
     }
 
     function kembali() {
@@ -99,7 +100,7 @@ class Transaksi extends CI_Controller
         $data = [
             'tgl_kembali' => date('Y-m-d H:i:s'),
             'status' => 2,
-            'date_kembali' => $datecek
+            'date_kembali' => date('Y-m-d'),
         ];
         $arr = array('rfid_no' => $rfid_input);
         // 'tgl_pinjam >=' => $datecek
@@ -120,14 +121,14 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',
-            'conten' => 'conten_hk/rekap_transaksi',
+            'conten' => 'conten/rekap_transaksi',
             'rekap' => $this->trans->rekap_trans(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
-        $this->load->view('template_hk/conten', $data);
+        $this->load->view('template/conten', $data);
     }
 
     function update_last_trans($id) {
