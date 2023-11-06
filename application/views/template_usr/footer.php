@@ -64,7 +64,8 @@
     var BASE_URL = "<?php echo base_url(); ?>";
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?= site_url('assets/custom_js/sweet.js') ?>"></script>
+<script src="<?= site_url('assets/custom_js/select2.js') ?>"></script>
 
 
 <!-- costume js -->
