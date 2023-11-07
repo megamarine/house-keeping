@@ -26,14 +26,14 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Pinjam',
-            'conten' => 'conten/trans_pinjam',
+            'conten' => 'conten_hk/trans_pinjam',
             'pinjam' => $this->trans->pinjam(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_hk/conten', $data);
     }
 
     function pinjam() {
@@ -72,7 +72,7 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
-            'conten' => 'conten/trans_kembali',
+            'conten' => 'conten_hk/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
             'kembali' => $this->trans->kembali(),
             'footer_js' => [
@@ -80,7 +80,7 @@ class Transaksi extends CI_Controller
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_hk/conten', $data);
     }
 
     function kembali() {
@@ -178,7 +178,7 @@ class Transaksi extends CI_Controller
         ];
         $name = 'Report APD - '.$convert.' '.$thn;
         $this->load->library('pdf');
-        $html = $this->load->view('conten/report', $data, true);
+        $html = $this->load->view('conten_hk/report', $data, true);
         $this->pdf->createPDF($html, $name, false);
     }
 
@@ -191,7 +191,7 @@ class Transaksi extends CI_Controller
         ];
         $name = 'Report APD - '.date('d/m/Y', strtotime($tgl_start)) .' sampai '.date('d/m/Y', strtotime($tgl_end));
         $this->load->library('pdf');
-        $html = $this->load->view('conten/report', $data, true);
+        $html = $this->load->view('conten_hk/report', $data, true);
         $this->pdf->createPDF($html, $name, false);
     }
 
@@ -208,7 +208,7 @@ class Transaksi extends CI_Controller
         ];
         $name = 'Report APD - '. $sts;
         $this->load->library('pdf');
-        $html = $this->load->view('conten/report', $data, true);
+        $html = $this->load->view('conten_hk/report', $data, true);
         $this->pdf->createPDF($html, $name, false);
     }
 
