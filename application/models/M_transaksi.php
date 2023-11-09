@@ -207,4 +207,27 @@ class M_transaksi extends CI_Model
     join tbl_master_bagian tmb on tmk.bagian_id = tmb.id
     where tt.status = $sts");
   }
+
+  function report_all_filter($tgl_start, $tgl_end, $sts) {
+    return $this->db->query("SELECT
+      tt.id,
+      tt.rfid_no,
+      tt.tgl_pinjam,
+      tt.tgl_kembali,
+      tt.status,
+      tt.keterangan,
+      tmt.item_name,
+      tmt.deskripsi,
+      tmk.no_badge,
+      tmk.name,
+      tmb.nama_bagian 
+    from
+      tbl_transaksi tt
+    join tbl_master_item tmt on
+      tmt.id = tt.item_id
+    join tbl_master_karyawan tmk on
+      tmk.rfid_no = tt.rfid_no
+    join tbl_master_bagian tmb on tmk.bagian_id = tmb.id
+    where tt.tgl_pinjam BETWEEN '$tgl_start' and '$tgl_end' and tt.status = '$sts' ");
+  }
 }
