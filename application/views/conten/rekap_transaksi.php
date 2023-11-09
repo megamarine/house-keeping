@@ -8,7 +8,7 @@
     <div class="card shadow mb-2">
 
         <div class="card-body">
-            <form action="<?= base_url('index.php/hk/transaksi/pdf') ?>" method="post">
+            <!-- <form action="<?= base_url('index.php/transaksi/pdf') ?>" method="post">
                 <div class="input-group col-md-4">
                     <select name="bulan" id="bulan" class="form-control" required>
                         <option value="" disabled selected>Pilih Bulan</option>
@@ -36,39 +36,44 @@
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-danger" id="btn" type="button">
                             <i class="fas fa-file-pdf"></i>
-                            <!-- <i class="fa-solid fa-share-from-square"></i> -->
                         </button>
                     </div>
                 </div>
-            </form>
-
-            <!-- Export By Date -->
-            <form action="<?= base_url('index.php/transaksi/pdf_bydate') ?>" method="post">
+            </form> -->
+            <form action="<?= base_url('index.php/transaksi/export_with_filter') ?>" method="post">
+                <!-- Export By Date -->
+                <!-- <form action="<?= base_url('index.php/transaksi/pdf_bydate') ?>" method="post"> -->
                 <div class="input-group col-md-4 mt-2">
                     <input type="date" class="form-control" name="date_start" id="date_start" required>
-                    <input type="date" class="form-control" name="date_end" id="date_end" required>
+                    <input type="date" class="form-control" name="date_end" id="date_end" require>
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-danger" id="btn" type="button">
+                        <!-- <button type="submit" class="btn btn-danger" id="btn" type="button">
                             <i class="fas fa-file-pdf"></i>
-                            <!-- <i class="fa-solid fa-share-from-square"></i> -->
-                        </button>
+                        </button> -->
                     </div>
                 </div>
-            </form>
+                <!-- </form> -->
 
-            <!-- Export by status -->
-            <form action="<?= base_url('index.php/transaksi/pdf_status') ?>" method="post">
+                <!-- Export by status -->
+                <!-- <form action="<?= base_url('index.php/transaksi/pdf_status') ?>" method="post"> -->
                 <div class="input-group col-md-4 mt-2">
-                    <select name="status" id="status" class="form-control">
+                    <select name="status" id="status" class="form-control" required>
                         <option value="" disabled selected> -- Choose One --</option>
                         <option value="1">Belum Lunas</option>
                         <option value="2">Lunas</option>
                     </select>
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-danger" id="btn" type="button">
+                        <!-- <button type="submit" class="btn btn-danger" id="btn" type="button">
                             <i class="fas fa-file-pdf"></i>
-                        </button>
+                        </button> -->
                     </div>
+                </div>
+                <!-- </form> -->
+
+                <div class="input-group col-md-4 mt-2">
+                    <button type="submit" class="btn btn-danger" id="btn" type="button">
+                        <i class="fas fa-file-pdf"> | Export PDF</i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -130,8 +135,8 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edittrans<?= $no++; ?>">
-                                            <i class="fa fa-check-circle"></i>
-                                        </button>
+                                        <i class="fa fa-check-circle"></i>
+                                    </button>
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?= $a++; ?>">
                                         Launch demo modal
                                     </button> -->
