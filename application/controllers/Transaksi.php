@@ -213,8 +213,8 @@ class Transaksi extends CI_Controller
     }
 
     function export_with_filter() {
-        $tgl_start = $this->input->post('date_start');
-        $tgl_end = $this->input->post('date_end');
+        $tgl_awal = $this->input->post('date_start');
+        $tgl_akhir = $this->input->post('date_end');
         $status = $this->input->post('status');
         if ($status = 1) {
             $sts = 'Belum Lunas';
@@ -223,7 +223,7 @@ class Transaksi extends CI_Controller
         }
 
         $title = 'Report APD';
-        $export = $this->trans->report_all_filter($tgl_start,$tgl_end,$status);
+        $export = $this->trans->report_all_filter($tgl_awal,$tgl_akhir,$status);
         $data = [
             'title' => $title,
             'data' => $export

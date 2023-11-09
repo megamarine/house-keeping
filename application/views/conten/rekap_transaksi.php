@@ -45,7 +45,7 @@
                 <!-- <form action="<?= base_url('index.php/transaksi/pdf_bydate') ?>" method="post"> -->
                 <div class="input-group col-md-4 mt-2">
                     <input type="date" class="form-control" name="date_start" id="date_start" required>
-                    <input type="date" class="form-control" name="date_end" id="date_end" require>
+                    <input type="date" class="form-control" name="date_end" id="date_end" required>
                     <div class="input-group-append">
                         <!-- <button type="submit" class="btn btn-danger" id="btn" type="button">
                             <i class="fas fa-file-pdf"></i>
