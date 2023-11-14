@@ -124,8 +124,28 @@ class M_transaksi extends CI_Model
       tmt.id = tt.item_id
     join tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
+		WHERE tt.date_pinjam BETWEEN DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND CURDATE()
     order by
-      tgl_pinjam desc");
+      tt.id desc");
+    //   SELECT
+    //   tt.id,
+    //   tt.rfid_no,
+    //   tt.tgl_pinjam,
+    //   tt.tgl_kembali,
+    //   tt.status,
+    //   tt.keterangan,
+    //   tmt.item_name,
+    //   tmt.deskripsi,
+    //   tmk.no_badge,
+    //   tmk.name
+    // from
+    //   tbl_transaksi tt
+    // join tbl_master_item tmt on
+    //   tmt.id = tt.item_id
+    // join tbl_master_karyawan tmk on
+    //   tmk.rfid_no = tt.rfid_no
+    // order by
+    //   tgl_pinjam desc
   }
 
   function data_kar($rfid)

@@ -71,6 +71,25 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Report
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= site_url('index.php/report') ?>">
+                    <i class="fas fa-book"></i>
+                    <span>Report</span></a>
+            </li>
+
+            <!-- Divider -->
+            <!-- <hr class="sidebar-divider"> -->
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

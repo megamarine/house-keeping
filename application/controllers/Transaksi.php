@@ -212,26 +212,5 @@ class Transaksi extends CI_Controller
         $this->pdf->createPDF($html, $name, false);
     }
 
-    function export_with_filter() {
-        $tgl_awal = $this->input->post('date_start');
-        $tgl_akhir = $this->input->post('date_end');
-        $status = $this->input->post('status');
-        if ($status = 1) {
-            $sts = 'Belum Lunas';
-        }else {
-            $sts = 'Lunas';
-        }
-
-        $title = 'Report APD';
-        $export = $this->trans->report_all_filter($tgl_awal,$tgl_akhir,$status);
-        $data = [
-            'title' => $title,
-            'data' => $export
-        ];
-        $name = $title;
-        $this->load->library('pdf');
-        $html = $this->load->view('conten/report', $data, true);
-        $this->pdf->createPDF($html, $name, false);
-    }
 
 }
