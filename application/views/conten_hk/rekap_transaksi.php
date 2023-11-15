@@ -97,7 +97,7 @@ foreach ($rekap->result() as $row) {
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Keterangan</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
+                            <textarea name="keterangan" id="keterangan" class="form-control" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
