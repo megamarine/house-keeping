@@ -97,21 +97,25 @@ class Transaksi extends CI_Controller
         $datecek = date('Y-m-d');
         // return var_dump($cek);
         $table = 'tbl_transaksi';
-        $data = [
-            'tgl_kembali' => date('Y-m-d H:i:s'),
-            'status' => 2,
-            'date_kembali' => date('Y-m-d'),
-        ];
+        $tgl_kembali = date('Y-m-d H:i:s');
+        $stat = 2;
+        // $data = [
+        //     'tgl_kembali' => date('Y-m-d H:i:s'),
+        //     'status' => 2,
+        //     'date_kembali' => date('Y-m-d'),
+        // ];
         $arr = array('rfid_no' => $rfid_input);
         // 'tgl_pinjam >=' => $datecek
         $where = $arr;
         if ($tgl_cek != null) {
             $this->session->set_flashdata('cek', 'Dilakukan');
         }elseif ($tgl_pjm != $datecek && $tgl_cek_sblm == null) {
-            $this->m_data->update_data($table,$data,$where);
+            // $this->m_data->update_data($table,$data,$where);
+            $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
         }else {
-            $this->m_data->update_data($table,$data,$where);
+            // $this->m_data->update_data($table,$data,$where);
+            $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
         }
         redirect('index.php/hk/transaksi/vkembali');
