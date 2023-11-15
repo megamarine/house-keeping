@@ -26,7 +26,11 @@ class M_data extends CI_Model
     $this->db->delete($table, $where);
   }
 
-  function update_trans($rfid, $tgl, $stat)  {
-    return $this->db->query("UPDATE tbl_transaksi SET tgl_kembali = '$tgl', status = $stat WHERE rfid_no = '$rfid' AND tgl_pinjam >= DATE(NOW())");
+  function update_trans($rfid, $tgl, $stat, $date_kem)  {
+    return $this->db->query("UPDATE tbl_transaksi SET tgl_kembali = '$tgl', date_kembali = '$date_kem', status = $stat WHERE rfid_no = '$rfid' AND tgl_pinjam >= DATE(NOW())");
+  }
+
+  function kembali($rfid, $tgl_kembali, $date_kembali, $stat) {
+    return $this->db->query("UPDATE tbl_transaksi SET tgl_kembali = '$tgl_kembali', date_kembali = '$date_kembali', status = '$stat' WHERE rfid_no = '$rfid' order by id desc limit 1");
   }
 }
