@@ -38,10 +38,12 @@
         <tr>
             <th>No</th>
             <th>ID Karyawan</th>
-            <th>Nama</th>
+            <th style="width: 10%;">Nama</th>
             <th>Bagian</th>
             <th>Tanggal Pinjam</th>
+            <th>Waktu Pinjam</th>
             <th>Tanggal Kembali</th>
+            <th>Waktu Kembali</th>
             <th>Keterangan</th>
         </tr>
         <?php
@@ -52,10 +54,18 @@
                 <td><?= $row->no_badge ?></td>
                 <td><?= $row->name ?></td>
                 <td><?= $row->nama_bagian ?></td>
-                <td><?= date('d-m-Y H:i:s', strtotime($row->tgl_pinjam)) ?></td>
+                <td><?= date('d-m-Y', strtotime($row->tgl_pinjam)) ?></td>
+                <td><?= date('H:i:s', strtotime($row->tgl_pinjam)) ?></td>
                 <td><?php 
                     if ($row->tgl_kembali != null) {
-                        echo date('d-m-Y H:i:s', strtotime($row->tgl_kembali));
+                        echo date('d-m-Y', strtotime($row->tgl_kembali));
+                    }else {
+                        echo ' ';
+                    }
+                ?></td>
+                <td><?php 
+                    if ($row->tgl_kembali != null) {
+                        echo date('H:i:s', strtotime($row->tgl_kembali));
                     }else {
                         echo ' ';
                     }

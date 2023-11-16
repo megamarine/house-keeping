@@ -47,15 +47,23 @@
         <?php
         $x=1; 
         foreach ($data->result() as $row) {?>
-            <tr>
+           <tr>
                 <td><?= $x++; ?></td>
                 <td><?= $row->no_badge ?></td>
                 <td><?= $row->name ?></td>
                 <td><?= $row->nama_bagian ?></td>
-                <td><?= date('d-m-Y H:i:s', strtotime($row->tgl_pinjam)) ?></td>
+                <td><?= date('d-m-Y', strtotime($row->tgl_pinjam)) ?></td>
+                <td><?= date('H:i:s', strtotime($row->tgl_pinjam)) ?></td>
                 <td><?php 
                     if ($row->tgl_kembali != null) {
-                        echo date('d-m-Y H:i:s', strtotime($row->tgl_kembali));
+                        echo date('d-m-Y', strtotime($row->tgl_kembali));
+                    }else {
+                        echo ' ';
+                    }
+                ?></td>
+                <td><?php 
+                    if ($row->tgl_kembali != null) {
+                        echo date('H:i:s', strtotime($row->tgl_kembali));
                     }else {
                         echo ' ';
                     }
