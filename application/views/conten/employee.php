@@ -4,8 +4,23 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
     <div class="flash-add" data-flashdata="<?= $this->session->flashdata('add') ?>"></div>
+    <div class="flash-cek" data-flashdata="<?= $this->session->flashdata('cek') ?>"></div>
+
+
+
+    <?php
+    if (validation_errors() == TRUE) { ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><?= validation_errors(); ?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php }
+    ?>
 
     <div class="card shadow mb-4">
+
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"><?= $subtitle ?></h6>
         </div>
@@ -84,18 +99,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">ID Karyawan</label>
-                        <input type="number" class="form-control" id="idkar" name="idkar" placeholder="123" required>
-                        <!-- <div class="invalid-feedback">
-                            Data Sudah ada
-                        </div> -->
+                        <input type="number" class="form-control" id="idkar" name="idkar" placeholder="123">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nama Karyawan</label>
-                        <input type="text" class="form-control" id="namakar" name="namakar" placeholder="Jhon Cena">
+                        <input type="text" class="form-control" id="namakar" name="namakar" placeholder="Jhon Cena" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Bagian</label>
-                        <select name="bagian" id="bagian" class="form-control select2">
+                        <select name="bagian" id="bagian" class="form-control select2" required>
                             <option value="" disabled selected>-- Pilih Bagian --</option>
                             <?php foreach ($bagian->result() as $row) { ?>
                                 <option value="<?= $row->id ?>"><?= $row->nama_bagian ?></option>
@@ -104,7 +116,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">No RFID</label>
-                        <input type="text" class="form-control" id="rfidno" name="rfidno" placeholder="Tap With Card">
+                        <input type="text" class="form-control" id="rfidno" name="rfidno" placeholder="Tap With Card" required>
                     </div>
                 </div>
                 <div class="modal-footer">

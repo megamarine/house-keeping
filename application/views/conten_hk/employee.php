@@ -5,6 +5,17 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
     <div class="flash-add" data-flashdata="<?= $this->session->flashdata('add') ?>"></div>
 
+    <?php
+    if (validation_errors() == TRUE) { ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><?= validation_errors(); ?></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php }
+    ?>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"><?= $subtitle ?></h6>
@@ -48,7 +59,7 @@
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?= $no++; ?>"><i class="fa fa-edit"></i></button>
                                     <?php 
                                     if ($row->status == 1) { ?>
-                                        <a href="<?= site_url('index.php/hk/Employee/delete/' . $row->id) ?>" class="btn btn-danger hapus-kar" title="Nonaktifkan Data"><i class="fa fa-power-off"></i></a>
+                                        <a href="<?= site_url('index.php/hk/Employee/nonaktif/' . $row->id) ?>" class="btn btn-danger hapus-kar" title="Nonaktifkan Data"><i class="fa fa-power-off"></i></a>
                                     <?php }
                                     ?>
                                 </td>
