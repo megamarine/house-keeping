@@ -41,4 +41,8 @@ class M_master extends CI_Model
       tmb.id = tmk.bagian_id");
   }
 
+  function cek_karyawan($id_kar)  {
+    return $this->db->query("SELECT no_badge FROM tbl_master_karyawan where no_badge = '$id_kar'");
+  }
+
 }

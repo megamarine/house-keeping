@@ -9,6 +9,17 @@ if (flashAdd) {
 	});
 }
 
+const flashCek = $(".flash-cek").data("flashdata");
+if (flashCek) {
+	Swal.fire({
+		icon: "error",
+		title: "Maaf",
+		text: "Data Karyawan Sudah ada ",
+        timer: 1500,
+        showConfirmButton: false,
+	});
+}
+
 $('.select2').select2({
 	dropdownParent: $('#tambah')
   });
