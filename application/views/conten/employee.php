@@ -46,9 +46,9 @@
                                 <td><?= $row->rfid_no ?></td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?= $no++; ?>"><i class="fa fa-edit"></i></button>
-                                    <?php 
+                                    <?php
                                     if ($row->status == 1) { ?>
-                                        <a href="<?= site_url('index.php/Employee/nonaktif/' . $row->id) ?>" class="btn btn-danger hapus-kar" title="Nonaktifkan Data"><i class="fa fa-power-off"></i></a>
+                                        <a href="<?= site_url('index.php/Employee/delete/' . $row->id) ?>" class="btn btn-danger hapus-kar" title="Nonaktifkan Data"><i class="fa fa-power-off"></i></a>
                                     <?php }
                                     ?>
                                 </td>
@@ -84,7 +84,10 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleFormControlInput1">ID Karyawan</label>
-                        <input type="number" class="form-control" id="idkar" name="idkar" placeholder="123">
+                        <input type="number" class="form-control" id="idkar" name="idkar" placeholder="123" required>
+                        <!-- <div class="invalid-feedback">
+                            Data Sudah ada
+                        </div> -->
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nama Karyawan</label>
@@ -117,13 +120,13 @@
 <!-- edit data -->
 <?php
 $y = 1;
-foreach ($employee->result() as $e) { 
+foreach ($employee->result() as $e) {
     $bagian = $e->bagian_id;
-    ?>
+?>
     <div class="modal fade" id="edit<?= $y++; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?= base_url('index.php/Employee/update_data/'.$e->id) ?>" method="post">
+                <form action="<?= base_url('index.php/Employee/update_data/' . $e->id) ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"><?= $titleform ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -139,7 +142,7 @@ foreach ($employee->result() as $e) {
                             <label for="exampleFormControlInput1">Nama Karyawan</label>
                             <input type="text" class="form-control" id="namakar" name="namakar" value="<?= $e->name ?>">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="exampleFormControlInput1">No RFID</label>
                             <input type="text" class="form-control" id="rfidno" name="rfidno" value="<?= $e->rfid_no ?>">

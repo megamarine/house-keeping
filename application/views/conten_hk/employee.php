@@ -48,7 +48,7 @@
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit<?= $no++; ?>"><i class="fa fa-edit"></i></button>
                                     <?php 
                                     if ($row->status == 1) { ?>
-                                        <a href="<?= site_url('index.php/hk/Employee/nonaktif/' . $row->id) ?>" class="btn btn-danger hapus-kar" title="Nonaktifkan Data"><i class="fa fa-power-off"></i></a>
+                                        <a href="<?= site_url('index.php/hk/Employee/delete/' . $row->id) ?>" class="btn btn-danger hapus-kar" title="Nonaktifkan Data"><i class="fa fa-power-off"></i></a>
                                     <?php }
                                     ?>
                                 </td>
