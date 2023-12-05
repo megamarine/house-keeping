@@ -90,6 +90,6 @@ class Employee extends CI_Controller
         $where = array('id'=>$id);
         $this->m_data->hapus_data($table,$where);
         $this->session->set_flashdata('add', 'Dinonaktifkan');
-        redirect('index.php/hk/employee');
+        redirect('index.php/employee');
     }
 }
