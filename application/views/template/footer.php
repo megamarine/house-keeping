@@ -76,6 +76,13 @@ if (isset($footer_js)) {
 <?php }
 } ?>
 
+<script type="text/javascript">
+	function formfocus() {
+		document.getElementById('rfid').focus();
+	}
+	window.onload = formfocus;
+</script>
+
 
 </body>
 
