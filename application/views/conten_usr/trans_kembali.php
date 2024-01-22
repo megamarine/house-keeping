@@ -19,7 +19,7 @@ foreach ($kembali->result() as $k) {
      <form action="<?= base_url('index.php/user/transaksi/kembali') ?>" method="post">
          <div class="input-group">
             <input type="text" name="rfid" id="rfid" class="form-control bg-light border-0 small" placeholder="Tab it..."
-                aria-label="Search" aria-describedby="basic-addon2" autofocus>
+                aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary" id="btn" type="button">
                     <i class="fas fa-truck fa-sm"></i>
