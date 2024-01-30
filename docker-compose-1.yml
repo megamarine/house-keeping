@@ -1,0 +1,56 @@
+# version: '3'
+# services:
+#   web:
+#     build:
+#       context: .
+#     ports:
+#       - "8002:80"
+#     depends_on:
+#       - db
+#   db:
+#     image: mysql:latest
+#     environment:
+#       MYSQL_DATABASE: db_hk
+#       MYSQL_USER: jandapirang
+#       MYSQL_PASSWORD: anaknyabanyak
+#       MYSQL_ROOT_PASSWORD: 123
+#     ports:
+#       - "5010:3306"
+
+version: "3.7"
+services:
+  php-apache-environment:
+    #nama container
+    container_name: php-apache
+    
+    # image docker yang digunakan
+    image: php7
+    
+    # port yang digunakan
+    # port 80 di container, diakses melalui port 8080 di host OS
+    ports:
+      - "8010:80"
+    
+    # menghubungkan folder di host OS / laptop ke container
+    # folder /var/www/html di sisi container
+    # /home/linuxluv/myweb/ di host OS tempat menyimpan source code web
+    volumes:
+      - /home/linuxluv/myweb/:/var/www/html
+  db:
+    container_name: db
+    image: mysql:latest
+    restart: always
+    
+    # user name dan password untuk mengakses mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '123'
+      MYSQL_USER: 'jandapirang'
+      MYSQL_PASSWORD: 'anaknyabanyak'
+    ports:
+      - "5002:3306"
+    
+    # menghubungkan folder di host OS / laptop ke container
+    # agar database tersimpan permanen
+    # /var/lib/mysql di container dimapping ke /home/linuxluv/dbvol di laptop
+    volumes:
+      - /home/linuxluv/dbvol:/var/lib/mysql

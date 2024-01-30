@@ -1,5 +1,12 @@
+function playNotificationSound() {
+	var audio = new Audio('assets/minion.mp3');
+	audio.play();
+}
+
 const flashTransaksi = $(".flash-transaksi").data("flashdata");
 if (flashTransaksi) {
+	var audio = new Audio('assets/minion.mp3');
+    audio.play();
 	Swal.fire({
 		icon: "success",
 		title: "Selamat",
@@ -11,6 +18,7 @@ if (flashTransaksi) {
 
 const flashCek = $(".flash-cek").data("flashdata");
 if (flashCek) {
+	playNotificationSound();
 	Swal.fire({
 		icon: "error",
 		title: "Maaf",

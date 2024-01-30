@@ -1,0 +1,22 @@
+version: '3.7'
+
+volumes:
+  wp-data:
+networks:
+  wp-network:
+
+services:
+  db:
+    container_name: db
+    image: mysql:latest
+    volumes:
+      - wp-data: /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '123'
+      MYSQL_DATABASE: db_hk
+      MYSQL_USER: jandapirang
+      MYSQL_PASSWORD: anaknyabanyak
+    ports:
+      - 5003:3306
+    networks:
+      - wp-network
