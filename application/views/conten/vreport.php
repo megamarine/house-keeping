@@ -61,6 +61,11 @@
                         <option value="1">Belum Lunas</option>
                         <option value="2">Lunas</option>
                     </select>
+                    <select name="status" id="status" class="form-control" required>
+                        <option value="" disabled selected> -- Choose One --</option>
+                        <option value="1">Belum Lunas</option>
+                        <option value="2">Lunas</option>
+                    </select>
                     <div class="input-group-append">
                         <!-- <button type="submit" class="btn btn-danger" id="btn" type="button">
                             <i class="fas fa-file-pdf"></i>

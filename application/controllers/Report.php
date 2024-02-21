@@ -33,7 +33,8 @@ class Report extends CI_Controller
         // die(var_dump($tgl_awal, $tgl_akhir,$status));
 
         $title = 'Report APD';
-        $export = $this->trans->report_all_filter($tgl_awal,$tgl_akhir,$status);
+        $export = $this->trans->report2($tgl_awal,$tgl_akhir,$status);
+        // die(var_dump($export));
         $data = [
             'title' => $title,
             'data' => $export
