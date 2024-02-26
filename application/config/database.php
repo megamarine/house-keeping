@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => '',
 	'database' => 'db_hk',
 	'dbdriver' => 'mysqli',
-	'port'	   => '5000',
+	'port'	   => '5001',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

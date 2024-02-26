@@ -10,6 +10,8 @@
 
 <!-- Form -->
 <div class="card shadow mb-2">
+
+<!-- <button type="button" onclick="playNotificationSound()">tes</button> -->
     
     <div class="card-body">
      <form action="<?= base_url('index.php/transaksi/pinjam') ?>" method="post">

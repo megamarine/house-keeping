@@ -1,12 +1,12 @@
 function playNotificationSound() {
-	var audio = new Audio('assets/minion.mp3');
-	audio.play();
+	var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'http://localhost:8010/house-keeping/assets/minion.mp3');
+	audioElement.play();
 }
 
 const flashTransaksi = $(".flash-transaksi").data("flashdata");
 if (flashTransaksi) {
-	var audio = new Audio('assets/minion.mp3');
-    audio.play();
+	playNotificationSound();
 	Swal.fire({
 		icon: "success",
 		title: "Selamat",

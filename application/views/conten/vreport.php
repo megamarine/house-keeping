@@ -61,15 +61,16 @@
                         <option value="1">Belum Lunas</option>
                         <option value="2">Lunas</option>
                     </select>
-                    <select name="status" id="status" class="form-control" required>
-                        <option value="" disabled selected> -- Choose One --</option>
-                        <option value="1">Belum Lunas</option>
-                        <option value="2">Lunas</option>
+                    <select name="bagian" id="bagian" class="form-control">
+                        <option value="" disabled selected>-- Pilih Bagian --</option>
+                        <?php foreach ($bagian->result() as $row) { ?>
+                            <option value="<?= $row->id ?>"><?= $row->nama_bagian ?></option>
+                        <?php } ?>
                     </select>
                     <div class="input-group-append">
                         <!-- <button type="submit" class="btn btn-danger" id="btn" type="button">
-                            <i class="fas fa-file-pdf"></i>
-                        </button> -->
+                        <i class="fas fa-file-pdf"></i>
+                    </button> -->
                     </div>
                 </div>
                 <!-- </form> -->
@@ -85,3 +86,4 @@
 
 </div>
 <!-- /.container-fluid -->
+

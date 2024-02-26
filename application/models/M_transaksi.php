@@ -251,7 +251,7 @@ class M_transaksi extends CI_Model
     where tt.date_pinjam BETWEEN '$tgl_start' and '$tgl_end' and tt.status = '$sts' order by id asc ");
   }
 
-  function report2($tgl_start, $tgl_end, $sts) {
+  function report2($tgl_start, $tgl_end, $sts, $bagian) {
     $this->db->select("tt.id, tt.rfid_no, tt.tgl_pinjam, tt.tgl_kembali, tt.status, tt.keterangan, tmt.item_name, tmt.deskripsi, tmk.no_badge, tmk.name, tmb.nama_bagian");
     $this->db->from('tbl_transaksi tt');
     $this->db->join('tbl_master_item tmt','tmt.id = tt.item_id');
@@ -259,6 +259,10 @@ class M_transaksi extends CI_Model
     $this->db->join('tbl_master_bagian tmb','tmk.bagian_id = tmb.id');
     $this->db->where("tt.date_pinjam BETWEEN '".$tgl_start."' AND '".$tgl_end."'");
     $this->db->where('tt.status',$sts);
+
+    if (!empty($bagian)) {
+      $this->db->where('tmb.id', $bagian);
+    }
     return $this->db->get();
   }
 }
