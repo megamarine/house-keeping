@@ -1,12 +1,12 @@
 function playNotificationSound() {
 	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost:8010/house-keeping/assets/g_trims.mp3');
+    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/g_trims.mp3');
 	audioElement.play();
 }
 
 function soundCek() {
 	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost:8010/house-keeping/assets/gojek_id.mp3');
+    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/gojek_id.mp3');
 	audioElement.play();
 }
 
