@@ -1,6 +1,12 @@
 function playNotificationSound() {
 	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost:8010/house-keeping/assets/minion.mp3');
+    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/g_trims.mp3');
+	audioElement.play();
+}
+
+function soundCek() {
+	var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/gojek_id.mp3');
 	audioElement.play();
 }
 
@@ -18,7 +24,7 @@ if (flashTransaksi) {
 
 const flashCek = $(".flash-cek").data("flashdata");
 if (flashCek) {
-	playNotificationSound();
+	soundCek();
 	Swal.fire({
 		icon: "error",
 		title: "Maaf",
@@ -41,6 +47,7 @@ if (flashCekData) {
 
 const flashCekDataTrans = $(".flash-cekdatatrans").data("flashdata");
 if (flashCekDataTrans) {
+	soundCek(); 
 	Swal.fire({
 		icon: "error",
 		title: "Maaf",
@@ -52,6 +59,7 @@ if (flashCekDataTrans) {
 
 const flashKembali = $(".flash-kembali").data("flashdata");
 if (flashKembali) {
+	playNotificationSound();
 	Swal.fire({
 		icon: "success",
 		title: "Selamat",
