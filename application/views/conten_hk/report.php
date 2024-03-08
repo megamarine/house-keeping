@@ -14,7 +14,7 @@
 }
 
 #customers td, #customers th {
-  border: 1px solid #ddd;
+  border: 1px solid black;
   padding: 8px;
 }
 
@@ -38,16 +38,18 @@
         <tr>
             <th>No</th>
             <th>ID Karyawan</th>
-            <th>Nama</th>
+            <th style="width: 10%;">Nama</th>
             <th>Bagian</th>
             <th>Tanggal Pinjam</th>
+            <th>Waktu Pinjam</th>
             <th>Tanggal Kembali</th>
+            <th>Waktu Kembali</th>
             <th>Keterangan</th>
         </tr>
         <?php
         $x=1; 
         foreach ($data->result() as $row) {?>
-           <tr>
+            <tr>
                 <td><?= $x++; ?></td>
                 <td><?= $row->no_badge ?></td>
                 <td><?= $row->name ?></td>
