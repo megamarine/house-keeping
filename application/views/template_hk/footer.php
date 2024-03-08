@@ -67,6 +67,11 @@
 <script src="<?= site_url('assets/custom_js/sweet.js') ?>"></script>
 <script src="<?= site_url('assets/custom_js/select2.js') ?>"></script>
 
+<script>
+$(document).ready(function() {
+    $('#bagian_hk').select2();
+});
+</script>
 
 <!-- costume js -->
 <?php

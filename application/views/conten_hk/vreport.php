@@ -7,7 +7,7 @@
     <div class="card shadow mb-2">
 
         <div class="card-body">
-            <!-- <form action="<?= base_url('index.php/transaksi/pdf') ?>" method="post">
+            <!-- <form action="<?= base_url('index.php/hk/transaksi/pdf') ?>" method="post">
                 <div class="input-group col-md-4">
                     <select name="bulan" id="bulan" class="form-control" required>
                         <option value="" disabled selected>Pilih Bulan</option>
@@ -54,17 +54,23 @@
                 <!-- </form> -->
 
                 <!-- Export by status -->
-                <!-- <form action="<?= base_url('index.php/transaksi/pdf_status') ?>" method="post"> -->
+                <!-- <form action="<?= base_url('index.php/hk/transaksi/pdf_status') ?>" method="post"> -->
                 <div class="input-group col-md-4 mt-2">
                     <select name="status" id="status" class="form-control" required>
                         <option value="" disabled selected> -- Choose One --</option>
                         <option value="1">Belum Lunas</option>
                         <option value="2">Lunas</option>
                     </select>
+                    <select name="bagian" id="bagian_hk" class="form-control">
+                        <option value="" disabled selected>-- Pilih Bagian --</option>
+                        <?php foreach ($bagian->result() as $row) { ?>
+                            <option value="<?= $row->id ?>"><?= $row->nama_bagian ?></option>
+                        <?php } ?>
+                    </select>
                     <div class="input-group-append">
                         <!-- <button type="submit" class="btn btn-danger" id="btn" type="button">
-                            <i class="fas fa-file-pdf"></i>
-                        </button> -->
+                        <i class="fas fa-file-pdf"></i>
+                    </button> -->
                     </div>
                 </div>
                 <!-- </form> -->
@@ -80,3 +86,4 @@
 
 </div>
 <!-- /.container-fluid -->
+
