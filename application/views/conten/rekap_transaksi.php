@@ -58,9 +58,9 @@
                                     <?php } ?>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edittrans<?= $no++; ?>">
+                                    <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#edittrans<?= $no++; ?>">
                                         <i class="fa fa-check-circle"></i>
-                                    </button>
+                                    </button> -->
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?= $a++; ?>">
                                         Launch demo modal
                                     </button> -->
@@ -85,7 +85,7 @@
      }
 </script> -->
 
-<?php
+<!-- <?php
 $y = 1;
 $date = date('Y-m-d H:i:s');
 foreach ($rekap->result() as $row) {
@@ -120,4 +120,4 @@ foreach ($rekap->result() as $row) {
     </div>
 <?php $no++;
 }
-?>
+?> -->
