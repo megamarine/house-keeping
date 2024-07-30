@@ -120,11 +120,11 @@ class M_transaksi extends CI_Model
       tmk.name
     from
       tbl_transaksi tt
-    join tbl_master_item tmt on
+    left join tbl_master_item tmt on
       tmt.id = tt.item_id
-    join tbl_master_karyawan tmk on
+    left join tbl_master_karyawan tmk on
       tmk.rfid_no = tt.rfid_no
-		WHERE tt.date_pinjam BETWEEN DATE_SUB(CURDATE(),INTERVAL 7 DAY) AND CURDATE()
+		WHERE tt.date_pinjam BETWEEN DATE_SUB(CURDATE(),INTERVAL 3 DAY) AND CURDATE()
     order by
       tt.id desc");
     //   SELECT

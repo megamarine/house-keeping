@@ -126,13 +126,33 @@ class Transaksi extends CI_Controller
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',
             'conten' => 'conten/rekap_transaksi',
-            'rekap' => $this->trans->rekap_trans(),
+            // 'rekap' => $this->trans->rekap_trans(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
         $this->load->view('template/conten', $data);
+    }
+
+    function rekap_transaksi2() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Rekap Transaksi',
+            'conten' => 'rekap_trans/index',
+            // 'rekap' => $this->trans->rekap_trans(),
+            'footer_js' => [
+                'assets/js/transaksi.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tableRekapTrans()
+    {
+        $data['rekap_trans_list'] =  $this->trans->rekap_trans()->result();
+        echo json_encode($this->load->view('rekap_trans/table-rekap-trans',$data, false));
     }
 
     function update_last_trans($id) {
