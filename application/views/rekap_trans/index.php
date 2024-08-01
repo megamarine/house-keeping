@@ -10,26 +10,26 @@
     <!-- <button type="button" onclick="playNotificationSound()">tes</button> -->
     
     <div class="card-body">
-     <form action="" method="post" id="updateForm">
+     <form action="" id="updateForm" name="updateForm" method="POST" enctype="multipart/form-data">
+        <input type="text" id="id" name="id">
         <div class="row">
             <div class="col-lg-3">
                 <div class="input-group">
-                   <input type="text" name="id_kar" id="id_kar" class="form-control bg-light border-0 small" placeholder="id_kar"
-                       aria-label="Search" aria-describedby="basic-addon2">
+                   <input type="text" name="rfid_no" id="rfid_no" class="form-control bg-light border-0 small" placeholder="rfid_no"
+                       aria-describedby="basic-addon2">
                </div>
             </div>
             <div class="col-lg-3">
                 <div class="input-group">
-                   <input type="datetime-local" name="datetime" id="datetime" class="form-control bg-light border-0 small">
+                   <input type="datetime-local" name="tgl_kembali" id="tgl_kembali" class="form-control bg-light border-0 small">
                </div>
             </div>
             <div class="col-lg-3">
                 <div class="input-group">
-                   <input type="text" name="keterangan" id="keterangan" class="form-control bg-light border-0 small">
+                   <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control bg-light border-0 small">
                </div>
             </div>
-            <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button>
-            
+            <button type="submit" id="save-data" class="btn btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> | Update Data</button>
         </div>
      </form>
     </div>

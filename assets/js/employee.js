@@ -116,7 +116,7 @@ $(document).ready(function () {
 
 function tableEmp() {
     $.ajax({
-        url: BASE_URL + "employee/tableEm",
+        url: BASE_URL + "index.php/employee/tableEm",
         type: "POST",
         success: function (data) {
             $('#div-table-em').html(data);

@@ -155,6 +155,43 @@ class Transaksi extends CI_Controller
         echo json_encode($this->load->view('rekap_trans/table-rekap-trans',$data, false));
     }
 
+    function store()
+    {
+
+        $id = $this->input->post('id');
+        if ($id != null) {
+            $table = 'tbl_transaksi';
+            $dataupdate = [
+                'tgl_kembali' => date('Y-m-d H:i:s', strtotime($this->input->post('tgl_kembali'))),
+                'status' => 2,
+                'keterangan' => $this->input->post('keterangan')
+            ];
+            $where = array('id' => $id);
+            $this->m_data->update_data($table, $dataupdate, $where);
+            echo json_encode(['status' => 'updated']);
+            // echo json_encode($data);
+        } else {
+            $table = 'tbl_transaksi';
+            $data = [
+                'no_badge' => $this->input->post('idkar'),
+                'name' => $this->input->post('namakar'),
+                'rfid_no' => $this->input->post('rfidno'),
+                'bagian_id' => $this->input->post('bagian')
+            ];
+            $this->m_data->simpan_data($table, $data);
+            // $this->session->set_flashdata('add', 'Disimpan');
+            echo json_encode(['status' => 'saved']);
+        }
+    }
+
+    function vedit($id)
+    {
+        $table = 'tbl_transaksi';
+        $where = array('id' => $id);
+        $data = $this->m_data->get_data_by_id($table, $where)->row();
+        echo json_encode($data);
+    }
+
     function update_last_trans($id) {
         $table = 'tbl_transaksi';
         $data = [

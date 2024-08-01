@@ -41,7 +41,7 @@
                         <span class="badge badge-info">Dipinjam</span>
                     <?php } ?>
                 </td>
-                <td>Action</td>
+                <td><button type="button" class="btn btn-warning edit" data-id="<?= $row->id ?>"><i class="fa fa-edit"></i></button></td>
             </tr>
         <?php  }
         ?>
