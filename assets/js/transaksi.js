@@ -7,12 +7,12 @@ $(document).ready(function () {
     $('#save-data').click(function (e) { 
         e.preventDefault();
 
-        Swal.fire({
-            icon: 'info',
-            title: 'Data Sedang diproses',
-            showConfirmButton: false,
-            // timer: 3000
-        })
+        // Swal.fire({
+        //     icon: 'info',
+        //     title: 'Data Sedang diproses',
+        //     showConfirmButton: false,
+        //     // timer: 3000
+        // })
 
         $.ajax({
             data: $('#updateForm').serialize(),
@@ -79,14 +79,3 @@ function tableRekapTrans() {
         }
     });
 }
-
-
-$(document).ready(function() {
-    tableDept();
-    $('#id').val('');
-    $('#updateForm').trigger("reset");
-
-    
-
-    
-});

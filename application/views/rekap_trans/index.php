@@ -11,7 +11,7 @@
     
     <div class="card-body">
      <form action="" id="updateForm" name="updateForm" method="POST" enctype="multipart/form-data">
-        <input type="text" id="id" name="id">
+        <input type="hidden" id="id" name="id">
         <div class="row">
             <div class="col-lg-3">
                 <div class="input-group">
