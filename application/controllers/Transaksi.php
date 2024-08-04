@@ -157,7 +157,66 @@ class Transaksi extends CI_Controller
         $this->load->view('template/conten', $data);
     }
 
+    function vkembali2() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Transaksi Kembali',
+            'conten' => 'kembali/index',
+            'kembali' => $this->trans->kembali(),
+            'footer_js' => [
+                // 'assets/js/trans.js',
+                'assets/js/kembali.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tableKembali()
+    {
+        $data['kembali_list'] =  $this->trans->kembali()->result();
+        echo json_encode($this->load->view('kembali/table-kembali',$data, false));
+    }
+
     function kembali() {
+        $rfid_input = $this->input->post('rfid');
+        $cek = $this->trans->cek_kembali($rfid_input);
+        $rfid = null;
+        $stts = null;
+        if ($cek->num_rows() > 0) {
+            $row = $cek->row();
+            $tgl_cek = $row->tgl_kembali;
+        }
+        $cek_sebelum = $this->trans->cek_kembali_sebelum($rfid_input);
+        if ($cek_sebelum->num_rows() > 0) {
+            $row = $cek_sebelum->row();
+            $tgl_cek_sblm = $row->tgl_kembali;
+            $tgl_pjm = $row->tgl_pinjam;
+        }
+        $datecek = date('Y-m-d');
+        $tgl_kembali = date('Y-m-d H:i:s');
+        $stat = 2;        
+        $table = 'tbl_transaksi';
+        $tgl_kembali = date('Y-m-d H:i:s');
+        $stat = 2;  
+        $arr = array('rfid_no' => $rfid_input);
+        $where = $arr;
+        if ($tgl_cek != null) {
+            // $this->session->set_flashdata('cek', 'Dilakukan');
+            echo json_encode(['alert' => 'cek']);
+        }elseif ($tgl_pjm != $datecek && $tgl_cek_sblm == null) {
+            // $this->m_data->update_data($table,$data,$where);
+            $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
+            // $this->session->set_flashdata('kembali', 'Dikembalikan');
+            echo json_encode(['alert' => 'updated']);
+        }else {
+            // $this->m_data->update_data($table,$data,$where);
+            $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
+            echo json_encode(['alert' => 'updated']);
+        }
+    }
+
+    function kembali_old() {
         $rfid_input = $this->input->post('rfid');
         $cek = $this->trans->cek_kembali($rfid_input);
         foreach ($cek->result() as $row) {
