@@ -17,7 +17,7 @@ $(document).ready(function () {
 
         $.ajax({
             data: $('#emForm').serialize(),
-            url: BASE_URL + "Employee/store",
+            url: BASE_URL + "index.php/Employee/store",
             type: "POST",
             dataType : 'json',
             success: function (response) {

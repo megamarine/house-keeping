@@ -36,6 +36,80 @@ class Transaksi extends CI_Controller
         $this->load->view('template/conten', $data);
     }
 
+    function trans_pinjam() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Transaksi Pinjam',
+            'conten' => 'pinjam/index',
+            'footer_js' => [
+                'assets/js/pinjam.js',
+                // 'assets/js/trans.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tablePinjam()
+    {
+        $data['pinjam_list'] =  $this->trans->pinjam()->result();
+        echo json_encode($this->load->view('pinjam/table-pinjam', $data, false));
+    }
+
+    function pinjam2() {
+        $rfid_input = $this->input->post('rfid');
+        $dk = $this->trans->data_kar($rfid_input);
+        $rfid = null;
+        $stts = null;
+        if ($dk->num_rows() > 0) {
+            $row = $dk->row();
+            $rfid = $row->rfid_no;
+            $stts = $row->status;
+        }
+        $cek = $this->trans->cek_pinjam($rfid_input);
+        $sts_trans = 0;
+        $cek_trans = $this->trans->cek_trans($rfid_input);
+        if ($cek_trans->num_rows() > 0) {
+            $row = $cek_trans->row();
+            $sts_trans = $row->status;
+        }
+        $id = $this->input->post('id');
+        if ($id != null) {
+            $table = 'tbl_transaksi';
+            $dataupdate = [
+                'rfid_no' => $rfid_input,
+                'item_id' => 1,
+                'tgl_pinjam' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'date_pinjam' => date('Y-m-d'),
+            ];
+            $where = array('id' => $id);
+            $this->m_data->update_data($table, $dataupdate, $where);
+            echo json_encode(['alert' => 'updated']);
+            // echo json_encode($data);
+        } else {
+            $table = 'tbl_transaksi';
+            $data = [
+                'rfid_no' => $rfid_input,
+                'item_id' => 1,
+                'tgl_pinjam' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'date_pinjam' => date('Y-m-d'),
+            ];
+            if ($rfid == null || $stts != 1) {
+                echo json_encode(['alert' => 'cekdata']);
+            }elseif ($sts_trans == 1) {
+                echo json_encode(['alert' => 'cekstatus']);
+            }elseif ($cek > 0) {
+                echo json_encode(['alert' => 'cektrans']);
+            }else {
+                $this->m_data->simpan_data($table,$data);
+                echo json_encode(['alert' => 'saved']);
+            }
+           
+        }
+    }
+
     function pinjam() {
         $rfid_input = $this->input->post('rfid');
         $dk = $this->trans->data_kar($rfid_input);
@@ -65,7 +139,7 @@ class Transaksi extends CI_Controller
             $this->m_data->simpan_data($table,$data);
             $this->session->set_flashdata('trans', 'Disimpan');
         }
-        redirect('index.php/transaksi');
+        redirect('index.php/transaksi/trans_pinjam');
     }
 
     function vkembali() {
@@ -121,7 +195,7 @@ class Transaksi extends CI_Controller
         redirect('index.php/transaksi/vkembali');
     }
 
-    function rekap_transaksi() {
+    function rekap_transaksi_old() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',
@@ -135,7 +209,7 @@ class Transaksi extends CI_Controller
         $this->load->view('template/conten', $data);
     }
 
-    function rekap_transaksi2() {
+    function rekap_transaksi() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',

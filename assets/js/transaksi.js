@@ -7,37 +7,27 @@ $(document).ready(function () {
     $('#save-data').click(function (e) { 
         e.preventDefault();
 
-        // Swal.fire({
-        //     icon: 'info',
-        //     title: 'Data Sedang diproses',
-        //     showConfirmButton: false,
-        //     // timer: 3000
-        // })
+        Swal.fire({
+            icon: 'info',
+            title: 'Data Sedang diproses',
+            showConfirmButton: false,
+            // timer: 3000
+        })
 
         $.ajax({
             data: $('#updateForm').serialize(),
             url: BASE_URL + "index.php/transaksi/store",
             type: "POST",
             datatype: 'json',
-            success: function(response) {
+            success: function(data) {
                 $('#updateForm').trigger("reset");
-                if (response.status === 'saved') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Data Berhasil disimpan',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                } else if (response.status === 'updated') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Data Berhasil diperbarui',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                }
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Data Berhasil diupdate',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 tableRekapTrans();
             },
             error: function(data) {
