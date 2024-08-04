@@ -45,24 +45,24 @@ $(document).ready(function () {
                         icon: 'error',
                         title: 'Error',
                         text: 'Data Karyawan Tidak ada',
-                        showConfirmButton: false,
-                        timer: 2000
+                        showConfirmButton: true,
+                        // timer: 2000
                     };
                 } else if (response.alert === 'cekstatus') {
                     alertConfig = {
                         icon: 'error',
                         title: 'Error',
                         text: 'Transaksi Sebelumnya Belum Selesai',
-                        showConfirmButton: false,
-                        timer: 2000
+                        showConfirmButton: true,
+                        // timer: 2000
                     };
                 } else if (response.alert === 'cektrans') {
                     alertConfig = {
                         icon: 'info',
                         title: 'Info',
                         text: 'Transaksi Telah Dilakukan',
-                        showConfirmButton: false,
-                        timer: 2000
+                        showConfirmButton: true,
+                        // timer: 2000
                     };
                 }
 
