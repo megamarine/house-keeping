@@ -26,14 +26,88 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Pinjam',
-            'conten' => 'conten_hk/trans_pinjam',
+            'conten' => 'conten/trans_pinjam',
             'pinjam' => $this->trans->pinjam(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function trans_pinjam() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Transaksi Pinjam',
+            'conten' => 'pinjam/index',
+            'footer_js' => [
+                'assets/js/pinjam.js',
+                // 'assets/js/trans.js',
+            ],
+            
+        ];
         $this->load->view('template_hk/conten', $data);
+    }
+
+    function tablePinjam()
+    {
+        $data['pinjam_list'] =  $this->trans->pinjam()->result();
+        echo json_encode($this->load->view('pinjam/table-pinjam', $data, false));
+    }
+
+    function pinjam2() {
+        $rfid_input = $this->input->post('rfid');
+        $dk = $this->trans->data_kar($rfid_input);
+        $rfid = null;
+        $stts = null;
+        if ($dk->num_rows() > 0) {
+            $row = $dk->row();
+            $rfid = $row->rfid_no;
+            $stts = $row->status;
+        }
+        $cek = $this->trans->cek_pinjam($rfid_input);
+        $sts_trans = 0;
+        $cek_trans = $this->trans->cek_trans($rfid_input);
+        if ($cek_trans->num_rows() > 0) {
+            $row = $cek_trans->row();
+            $sts_trans = $row->status;
+        }
+        $id = $this->input->post('id');
+        if ($id != null) {
+            $table = 'tbl_transaksi';
+            $dataupdate = [
+                'rfid_no' => $rfid_input,
+                'item_id' => 1,
+                'tgl_pinjam' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'date_pinjam' => date('Y-m-d'),
+            ];
+            $where = array('id' => $id);
+            $this->m_data->update_data($table, $dataupdate, $where);
+            echo json_encode(['alert' => 'updated']);
+            // echo json_encode($data);
+        } else {
+            $table = 'tbl_transaksi';
+            $data = [
+                'rfid_no' => $rfid_input,
+                'item_id' => 1,
+                'tgl_pinjam' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'date_pinjam' => date('Y-m-d'),
+            ];
+            if ($rfid == null || $stts != 1) {
+                echo json_encode(['alert' => 'cekdata']);
+            }elseif ($sts_trans == 1) {
+                echo json_encode(['alert' => 'cekstatus']);
+            }elseif ($cek > 0) {
+                echo json_encode(['alert' => 'cektrans']);
+            }else {
+                $this->m_data->simpan_data($table,$data);
+                echo json_encode(['alert' => 'saved']);
+            }
+           
+        }
     }
 
     function pinjam() {
@@ -65,14 +139,14 @@ class Transaksi extends CI_Controller
             $this->m_data->simpan_data($table,$data);
             $this->session->set_flashdata('trans', 'Disimpan');
         }
-        redirect('index.php/hk/transaksi');
+        redirect('index.php/transaksi/trans_pinjam');
     }
 
     function vkembali() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
-            'conten' => 'conten_hk/trans_kembali',
+            'conten' => 'conten/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
             'kembali' => $this->trans->kembali(),
             'footer_js' => [
@@ -80,7 +154,7 @@ class Transaksi extends CI_Controller
             ],
             
         ];
-        $this->load->view('template_hk/conten', $data);
+        $this->load->view('template/conten', $data);
     }
 
     function kembali() {
@@ -118,21 +192,78 @@ class Transaksi extends CI_Controller
             $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
         }
-        redirect('index.php/hk/transaksi/vkembali');
+        redirect('index.php/transaksi/vkembali');
     }
 
-    function rekap_transaksi() {
+    function rekap_transaksi_old() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',
             'conten' => 'conten/rekap_transaksi',
-            'rekap' => $this->trans->rekap_trans(),
+            // 'rekap' => $this->trans->rekap_trans(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
         $this->load->view('template/conten', $data);
+    }
+
+    function rekap_transaksi() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Rekap Transaksi',
+            'conten' => 'rekap_trans/index',
+            // 'rekap' => $this->trans->rekap_trans(),
+            'footer_js' => [
+                'assets/js/transaksi.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tableRekapTrans()
+    {
+        $data['rekap_trans_list'] =  $this->trans->rekap_trans()->result();
+        echo json_encode($this->load->view('rekap_trans/table-rekap-trans',$data, false));
+    }
+
+    function store()
+    {
+
+        $id = $this->input->post('id');
+        if ($id != null) {
+            $table = 'tbl_transaksi';
+            $dataupdate = [
+                'tgl_kembali' => date('Y-m-d H:i:s', strtotime($this->input->post('tgl_kembali'))),
+                'status' => 2,
+                'keterangan' => $this->input->post('keterangan')
+            ];
+            $where = array('id' => $id);
+            $this->m_data->update_data($table, $dataupdate, $where);
+            echo json_encode(['status' => 'updated']);
+            // echo json_encode($data);
+        } else {
+            $table = 'tbl_transaksi';
+            $data = [
+                'no_badge' => $this->input->post('idkar'),
+                'name' => $this->input->post('namakar'),
+                'rfid_no' => $this->input->post('rfidno'),
+                'bagian_id' => $this->input->post('bagian')
+            ];
+            $this->m_data->simpan_data($table, $data);
+            // $this->session->set_flashdata('add', 'Disimpan');
+            echo json_encode(['status' => 'saved']);
+        }
+    }
+
+    function vedit($id)
+    {
+        $table = 'tbl_transaksi';
+        $where = array('id' => $id);
+        $data = $this->m_data->get_data_by_id($table, $where)->row();
+        echo json_encode($data);
     }
 
     function update_last_trans($id) {
@@ -145,7 +276,7 @@ class Transaksi extends CI_Controller
         $where = array('id' => $id);
         $this->m_data->update_data($table,$data,$where);
         $this->session->set_flashdata('kembali', 'Dikembalikan');
-        redirect('index.php/hk/transaksi/rekap_transaksi');
+        redirect('index.php/transaksi/rekap_transaksi');
     }
 
     function pdf() {
@@ -182,7 +313,7 @@ class Transaksi extends CI_Controller
         ];
         $name = 'Report APD - '.$convert.' '.$thn;
         $this->load->library('pdf');
-        $html = $this->load->view('conten_hk/report', $data, true);
+        $html = $this->load->view('conten/report', $data, true);
         $this->pdf->createPDF($html, $name, false);
     }
 
@@ -195,7 +326,7 @@ class Transaksi extends CI_Controller
         ];
         $name = 'Report APD - '.date('d/m/Y', strtotime($tgl_start)) .' sampai '.date('d/m/Y', strtotime($tgl_end));
         $this->load->library('pdf');
-        $html = $this->load->view('conten_hk/report', $data, true);
+        $html = $this->load->view('conten/report', $data, true);
         $this->pdf->createPDF($html, $name, false);
     }
 
@@ -212,30 +343,9 @@ class Transaksi extends CI_Controller
         ];
         $name = 'Report APD - '. $sts;
         $this->load->library('pdf');
-        $html = $this->load->view('conten_hk/report', $data, true);
-        $this->pdf->createPDF($html, $name, false);
-    }
-
-    function export_with_filter() {
-        $tgl_start = $this->input->post('date_start');
-        $tgl_end = $this->input->post('date_end');
-        $status = $this->input->post('status');
-        if ($status = 1) {
-            $sts = 'Belum Lunas';
-        }else {
-            $sts = 'Lunas';
-        }
-
-        $title = 'Report APD';
-        $export = $this->trans->report_all_filter($tgl_start,$tgl_end,$status);
-        $data = [
-            'title' => $title,
-            'data' => $export
-        ];
-        $name = $title;
-        $this->load->library('pdf');
         $html = $this->load->view('conten/report', $data, true);
         $this->pdf->createPDF($html, $name, false);
     }
+
 
 }

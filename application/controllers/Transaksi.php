@@ -20,7 +20,7 @@ class Transaksi extends CI_Controller
     }
 
 
-    public function index()
+    public function index2()
 
     {
         $data = [
@@ -36,7 +36,7 @@ class Transaksi extends CI_Controller
         $this->load->view('template/conten', $data);
     }
 
-    function trans_pinjam() {
+    function index() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Pinjam',
