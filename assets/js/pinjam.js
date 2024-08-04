@@ -33,6 +33,7 @@ $(document).ready(function () {
                 };
 
                 if (response.alert === 'saved') {
+                    playNotificationSound();
                     alertConfig = {
                         icon: 'success',
                         title: 'Success',
@@ -96,4 +97,16 @@ function tablePinjam() {
             });
         }
     });
+}
+
+function playNotificationSound() {
+	var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/g_trims.mp3');
+	audioElement.play();
+}
+
+function soundCek() {
+	var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/gojek_id.mp3');
+	audioElement.play();
 }

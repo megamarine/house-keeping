@@ -142,7 +142,7 @@ class Transaksi extends CI_Controller
         redirect('index.php/transaksi/trans_pinjam');
     }
 
-    function vkembali() {
+    function vkembali_old() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
@@ -157,7 +157,7 @@ class Transaksi extends CI_Controller
         $this->load->view('template/conten', $data);
     }
 
-    function vkembali2() {
+    function vkembali() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
