@@ -123,6 +123,7 @@ function tableEmp() {
             $('#empTable').DataTable({
                 "processing": true,
                 "responsive": true,
+                "serverSide": true,
             });
         }
     });
