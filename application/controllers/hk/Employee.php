@@ -107,7 +107,7 @@ class Employee extends CI_Controller
             'bagian' => $this->m_data->get_data('tbl_master_bagian'),
         ];
 
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_hk/conten', $data);
     }
 
     function tableEm()

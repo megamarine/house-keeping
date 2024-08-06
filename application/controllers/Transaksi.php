@@ -20,7 +20,7 @@ class Transaksi extends CI_Controller
     }
 
 
-    public function index()
+    public function index2()
 
     {
         $data = [
@@ -34,6 +34,80 @@ class Transaksi extends CI_Controller
             
         ];
         $this->load->view('template/conten', $data);
+    }
+
+    function index() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Transaksi Pinjam',
+            'conten' => 'pinjam/index',
+            'footer_js' => [
+                'assets/js/pinjam.js',
+                // 'assets/js/trans.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tablePinjam()
+    {
+        $data['pinjam_list'] =  $this->trans->pinjam()->result();
+        echo json_encode($this->load->view('pinjam/table-pinjam', $data, false));
+    }
+
+    function pinjam2() {
+        $rfid_input = $this->input->post('rfid');
+        $dk = $this->trans->data_kar($rfid_input);
+        $rfid = null;
+        $stts = null;
+        if ($dk->num_rows() > 0) {
+            $row = $dk->row();
+            $rfid = $row->rfid_no;
+            $stts = $row->status;
+        }
+        $cek = $this->trans->cek_pinjam($rfid_input);
+        $sts_trans = 0;
+        $cek_trans = $this->trans->cek_trans($rfid_input);
+        if ($cek_trans->num_rows() > 0) {
+            $row = $cek_trans->row();
+            $sts_trans = $row->status;
+        }
+        $id = $this->input->post('id');
+        if ($id != null) {
+            $table = 'tbl_transaksi';
+            $dataupdate = [
+                'rfid_no' => $rfid_input,
+                'item_id' => 1,
+                'tgl_pinjam' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'date_pinjam' => date('Y-m-d'),
+            ];
+            $where = array('id' => $id);
+            $this->m_data->update_data($table, $dataupdate, $where);
+            echo json_encode(['alert' => 'updated']);
+            // echo json_encode($data);
+        } else {
+            $table = 'tbl_transaksi';
+            $data = [
+                'rfid_no' => $rfid_input,
+                'item_id' => 1,
+                'tgl_pinjam' => date('Y-m-d H:i:s'),
+                'status' => 1,
+                'date_pinjam' => date('Y-m-d'),
+            ];
+            if ($rfid == null || $stts != 1) {
+                echo json_encode(['alert' => 'cekdata']);
+            }elseif ($sts_trans == 1) {
+                echo json_encode(['alert' => 'cekstatus']);
+            }elseif ($cek > 0) {
+                echo json_encode(['alert' => 'cektrans']);
+            }else {
+                $this->m_data->simpan_data($table,$data);
+                echo json_encode(['alert' => 'saved']);
+            }
+           
+        }
     }
 
     function pinjam() {
@@ -65,10 +139,10 @@ class Transaksi extends CI_Controller
             $this->m_data->simpan_data($table,$data);
             $this->session->set_flashdata('trans', 'Disimpan');
         }
-        redirect('index.php/transaksi');
+        redirect('index.php/transaksi/trans_pinjam');
     }
 
-    function vkembali() {
+    function vkembali_old() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
@@ -83,7 +157,66 @@ class Transaksi extends CI_Controller
         $this->load->view('template/conten', $data);
     }
 
+    function vkembali() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Transaksi Kembali',
+            'conten' => 'kembali/index',
+            'kembali' => $this->trans->kembali(),
+            'footer_js' => [
+                // 'assets/js/trans.js',
+                'assets/js/kembali.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tableKembali()
+    {
+        $data['kembali_list'] =  $this->trans->kembali()->result();
+        echo json_encode($this->load->view('kembali/table-kembali',$data, false));
+    }
+
     function kembali() {
+        $rfid_input = $this->input->post('rfid');
+        $cek = $this->trans->cek_kembali($rfid_input);
+        $rfid = null;
+        $stts = null;
+        if ($cek->num_rows() > 0) {
+            $row = $cek->row();
+            $tgl_cek = $row->tgl_kembali;
+        }
+        $cek_sebelum = $this->trans->cek_kembali_sebelum($rfid_input);
+        if ($cek_sebelum->num_rows() > 0) {
+            $row = $cek_sebelum->row();
+            $tgl_cek_sblm = $row->tgl_kembali;
+            $tgl_pjm = $row->tgl_pinjam;
+        }
+        $datecek = date('Y-m-d');
+        $tgl_kembali = date('Y-m-d H:i:s');
+        $stat = 2;        
+        $table = 'tbl_transaksi';
+        $tgl_kembali = date('Y-m-d H:i:s');
+        $stat = 2;  
+        $arr = array('rfid_no' => $rfid_input);
+        $where = $arr;
+        if ($tgl_cek != null) {
+            // $this->session->set_flashdata('cek', 'Dilakukan');
+            echo json_encode(['alert' => 'cek']);
+        }elseif ($tgl_pjm != $datecek && $tgl_cek_sblm == null) {
+            // $this->m_data->update_data($table,$data,$where);
+            $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
+            // $this->session->set_flashdata('kembali', 'Dikembalikan');
+            echo json_encode(['alert' => 'updated']);
+        }else {
+            // $this->m_data->update_data($table,$data,$where);
+            $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
+            echo json_encode(['alert' => 'updated']);
+        }
+    }
+
+    function kembali_old() {
         $rfid_input = $this->input->post('rfid');
         $cek = $this->trans->cek_kembali($rfid_input);
         foreach ($cek->result() as $row) {
@@ -121,18 +254,75 @@ class Transaksi extends CI_Controller
         redirect('index.php/transaksi/vkembali');
     }
 
-    function rekap_transaksi() {
+    function rekap_transaksi_old() {
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Rekap Transaksi',
             'conten' => 'conten/rekap_transaksi',
-            'rekap' => $this->trans->rekap_trans(),
+            // 'rekap' => $this->trans->rekap_trans(),
             'footer_js' => [
                 'assets/js/trans.js',
             ],
             
         ];
         $this->load->view('template/conten', $data);
+    }
+
+    function rekap_transaksi() {
+        $data = [
+            // 'name'    => $this->session->userdata('nama'),
+            'title' => 'Rekap Transaksi',
+            'conten' => 'rekap_trans/index',
+            // 'rekap' => $this->trans->rekap_trans(),
+            'footer_js' => [
+                'assets/js/transaksi.js',
+            ],
+            
+        ];
+        $this->load->view('template/conten', $data);
+    }
+
+    function tableRekapTrans()
+    {
+        $data['rekap_trans_list'] =  $this->trans->rekap_trans()->result();
+        echo json_encode($this->load->view('rekap_trans/table-rekap-trans',$data, false));
+    }
+
+    function store()
+    {
+
+        $id = $this->input->post('id');
+        if ($id != null) {
+            $table = 'tbl_transaksi';
+            $dataupdate = [
+                'tgl_kembali' => date('Y-m-d H:i:s', strtotime($this->input->post('tgl_kembali'))),
+                'status' => 2,
+                'keterangan' => $this->input->post('keterangan')
+            ];
+            $where = array('id' => $id);
+            $this->m_data->update_data($table, $dataupdate, $where);
+            echo json_encode(['status' => 'updated']);
+            // echo json_encode($data);
+        } else {
+            $table = 'tbl_transaksi';
+            $data = [
+                'no_badge' => $this->input->post('idkar'),
+                'name' => $this->input->post('namakar'),
+                'rfid_no' => $this->input->post('rfidno'),
+                'bagian_id' => $this->input->post('bagian')
+            ];
+            $this->m_data->simpan_data($table, $data);
+            // $this->session->set_flashdata('add', 'Disimpan');
+            echo json_encode(['status' => 'saved']);
+        }
+    }
+
+    function vedit($id)
+    {
+        $table = 'tbl_transaksi';
+        $where = array('id' => $id);
+        $data = $this->m_data->get_data_by_id($table, $where)->row();
+        echo json_encode($data);
     }
 
     function update_last_trans($id) {

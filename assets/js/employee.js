@@ -17,7 +17,7 @@ $(document).ready(function () {
 
         $.ajax({
             data: $('#emForm').serialize(),
-            url: BASE_URL + "Employee/store",
+            url: BASE_URL + "index.php/Employee/store",
             type: "POST",
             dataType : 'json',
             success: function (response) {
@@ -116,13 +116,14 @@ $(document).ready(function () {
 
 function tableEmp() {
     $.ajax({
-        url: BASE_URL + "employee/tableEm",
+        url: BASE_URL + "index.php/employee/tableEm",
         type: "POST",
         success: function (data) {
             $('#div-table-em').html(data);
             $('#empTable').DataTable({
                 "processing": true,
                 "responsive": true,
+                "serverside": true,
             });
         }
     });
