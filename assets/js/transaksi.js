@@ -65,7 +65,7 @@ function tableRekapTrans() {
             $('#rekaptransTable').DataTable({
                 "processing": true,
                 "responsive": true,
-                "serverSide": true,
+                "serverside": true,
             });
         }
     });

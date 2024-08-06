@@ -94,7 +94,7 @@ function tablePinjam() {
             $('#pinjamTable').DataTable({
                 "processing": true,
                 "responsive": true,
-                "serverSide": true,
+                "serverside": true,
             });
         }
     });

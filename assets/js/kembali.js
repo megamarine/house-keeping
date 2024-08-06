@@ -76,7 +76,7 @@ function tableKembali() {
             $('#kembaliTable').DataTable({
                 "processing": true,
                 "responsive": true,
-                "serverSide": true,
+                "serverside": true,
             });
         }
     });
