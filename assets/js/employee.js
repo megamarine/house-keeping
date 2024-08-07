@@ -121,9 +121,9 @@ function tableEmp() {
         success: function (data) {
             $('#div-table-em').html(data);
             $('#empTable').DataTable({
+                "serverside": true,
                 "processing": true,
                 "responsive": true,
-                "serverside": true,
             });
         }
     });

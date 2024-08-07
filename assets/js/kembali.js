@@ -15,7 +15,7 @@ $(document).ready(function () {
 
         $.ajax({
             data: $('#kembali').serialize(),
-            url: BASE_URL + "index.php/transaksi/kembali2",
+            url: BASE_URL + "index.php/transaksi/kembali",
             type: "POST",
             dataType: 'json',
             success: function(response) {
