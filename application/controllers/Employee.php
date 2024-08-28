@@ -10,6 +10,7 @@ class Employee extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_master', 'master');
+        date_default_timezone_set('Asia/Jakarta');
 
         // if ($this->session->userdata('status') == FALSE || $this->session->userdata('level') != 1) {
 
@@ -127,7 +128,8 @@ class Employee extends CI_Controller
                 'no_badge' => $this->input->post('idkar'),
                 'name' => $this->input->post('namakar'),
                 'rfid_no' => $this->input->post('rfidno'),
-                'bagian_id' => $this->input->post('bagian')
+                'bagian_id' => $this->input->post('bagian'),
+                'update_at' => date('Y-m-d H:i:s')
             ];
             $where = array('id' => $id);
             $this->m_data->update_data($table, $dataupdate, $where);
@@ -146,7 +148,8 @@ class Employee extends CI_Controller
                     'no_badge' => $this->input->post('idkar'),
                     'name' => $this->input->post('namakar'),
                     'rfid_no' => $this->input->post('rfidno'),
-                    'bagian_id' => $this->input->post('bagian')
+                    'bagian_id' => $this->input->post('bagian'),
+                    'create_at' => date('Y-m-d H:i:s')
                 ];
                 $this->m_data->simpan_data($table, $data);
                 // $this->session->set_flashdata('add', 'Disimpan');

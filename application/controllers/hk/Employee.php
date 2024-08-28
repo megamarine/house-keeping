@@ -127,7 +127,8 @@ class Employee extends CI_Controller
                 'no_badge' => $this->input->post('idkar'),
                 'name' => $this->input->post('namakar'),
                 'rfid_no' => $this->input->post('rfidno'),
-                'bagian_id' => $this->input->post('bagian')
+                'bagian_id' => $this->input->post('bagian'),
+                'update_at' => date('Y-m-d H:i:s')
             ];
             $where = array('id' => $id);
             $this->m_data->update_data($table, $dataupdate, $where);
@@ -146,7 +147,8 @@ class Employee extends CI_Controller
                     'no_badge' => $this->input->post('idkar'),
                     'name' => $this->input->post('namakar'),
                     'rfid_no' => $this->input->post('rfidno'),
-                    'bagian_id' => $this->input->post('bagian')
+                    'bagian_id' => $this->input->post('bagian'),
+                    'create_at' => date('Y-m-d H:i:s')
                 ];
                 $this->m_data->simpan_data($table, $data);
                 // $this->session->set_flashdata('add', 'Disimpan');
