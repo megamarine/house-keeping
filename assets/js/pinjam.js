@@ -42,6 +42,7 @@ $(document).ready(function () {
                         timer: 2000
                     };
                 } else if (response.alert === 'cekdata') {
+                    cekDataKaryawan();
                     alertConfig = {
                         icon: 'error',
                         title: 'Error',
@@ -50,6 +51,7 @@ $(document).ready(function () {
                         // timer: 2000
                     };
                 } else if (response.alert === 'cekstatus') {
+                    transPinjamNotEnd();
                     alertConfig = {
                         icon: 'error',
                         title: 'Error',
@@ -58,6 +60,7 @@ $(document).ready(function () {
                         // timer: 2000
                     };
                 } else if (response.alert === 'cektrans') {
+                    transTelahDilakukan();
                     alertConfig = {
                         icon: 'info',
                         title: 'Info',
@@ -102,12 +105,35 @@ function tablePinjam() {
 
 function playNotificationSound() {
 	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/g_trims.mp3');
+    var url = BASE_URL + "assets/g_trims.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
+}
+
+function cekDataKaryawan() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/mst_kar_not_found.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
+}
+
+function transPinjamNotEnd() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/trans_pinjam_belum_lunas.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
+}
+
+function transTelahDilakukan() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/trans_telah_dilakukan.mp3";
+    audioElement.setAttribute('src', url);
 	audioElement.play();
 }
 
 function soundCek() {
 	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/gojek_id.mp3');
+    var url = BASE_URL + "assets/gojek_id.mp3";
+    audioElement.setAttribute('src', url);
 	audioElement.play();
 }
