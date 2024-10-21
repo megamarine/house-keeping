@@ -33,6 +33,7 @@ $(document).ready(function () {
                 };
 
                 if (response.alert === 'updated') {
+                    playNotificationSound();
                     alertConfig = {
                         icon: 'success',
                         title: 'Success',
@@ -41,6 +42,7 @@ $(document).ready(function () {
                         timer: 2000
                     };
                 } else if (response.alert === 'cek') {
+                    soundCek();
                     alertConfig = {
                         icon: 'error',
                         title: 'Error',
@@ -80,4 +82,18 @@ function tableKembali() {
             });
         }
     });
+}
+
+function playNotificationSound() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/ty.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
+}
+
+function soundCek() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/trans_telah_dilakukan.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
 }
