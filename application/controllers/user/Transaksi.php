@@ -178,7 +178,7 @@ class Transaksi extends CI_Controller
         echo json_encode($this->load->view('kembali/table-kembali',$data, false));
     }
 
-    function kembali() {
+    function kembali_new() {
         $rfid_input = $this->input->post('rfid');
         $cek = $this->trans->cek_kembali($rfid_input);
         $rfid = null;
@@ -216,7 +216,7 @@ class Transaksi extends CI_Controller
         }
     }
 
-    function kembali_old() {
+    function kembali() {
         $rfid_input = $this->input->post('rfid');
         $cek = $this->trans->cek_kembali($rfid_input);
         foreach ($cek->result() as $row) {
@@ -251,7 +251,7 @@ class Transaksi extends CI_Controller
             $this->m_data->kembali($rfid_input, $tgl_kembali, $datecek, $stat);
             $this->session->set_flashdata('kembali', 'Dikembalikan');
         }
-        redirect('index.php/transaksi/vkembali');
+        redirect('index.php/user/transaksi/vkembali');
     }
 
     function rekap_transaksi_old() {
