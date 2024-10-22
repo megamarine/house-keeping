@@ -146,7 +146,7 @@ class Transaksi extends CI_Controller
         $data = [
             // 'name'    => $this->session->userdata('nama'),
             'title' => 'Transaksi Kembali',
-            'conten' => 'conten/trans_kembali',
+            'conten' => 'conten_usr/trans_kembali',
             'pinjam' => $this->trans->pinjam(),
             'kembali' => $this->trans->kembali(),
             'footer_js' => [
@@ -154,7 +154,7 @@ class Transaksi extends CI_Controller
             ],
             
         ];
-        $this->load->view('template/conten', $data);
+        $this->load->view('template_usr/conten', $data);
     }
 
     function vkembali_new() {
