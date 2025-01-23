@@ -1,18 +1,5 @@
-function playNotificationSound() {
-	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/g_trims.mp3');
-	audioElement.play();
-}
-
-function soundCek() {
-	var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://localhost/house-keeping/assets/gojek_id.mp3');
-	audioElement.play();
-}
-
 const flashTransaksi = $(".flash-transaksi").data("flashdata");
 if (flashTransaksi) {
-	playNotificationSound();
 	Swal.fire({
 		icon: "success",
 		title: "Selamat",
@@ -67,4 +54,18 @@ if (flashKembali) {
         timer: 1000,
         showConfirmButton: false,
 	});
+}
+
+function playNotificationSound() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/ty.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
+}
+
+function soundCek() {
+	var audioElement = document.createElement('audio');
+    var url = BASE_URL + "assets/trans_telah_dilakukan.mp3";
+    audioElement.setAttribute('src', url);
+	audioElement.play();
 }
